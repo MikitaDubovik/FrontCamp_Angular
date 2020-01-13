@@ -1,0 +1,29 @@
+.header {
+  border-width: 3px;
+  border-style: solid;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
+img {
+  width: 3%;
+  height: 4%;
+  margin-left: 2%;
+  padding-right: 1%;
+  vertical-align: middle;
+}
+
+.logo {
+  position: inherit;
+}
+
+p {
+  display: inline-block;
+}
+
+.user {
+  float: right;
+  margin-right: 2%;
+}

@@ -1,0 +1,18 @@
+.footer {
+  border-width: 3px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  border-style: solid;
+}
+
+.footer .footerLogo {
+  text-align: left;
+  display: inline-block;
+  margin-left: 2%;
+}
+.footer .poweredLogo{
+    float: right;
+    margin-right: 2%;
+}
