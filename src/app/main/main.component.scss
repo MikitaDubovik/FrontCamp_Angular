@@ -1,16 +1,16 @@
 .main {
   position: absolute;
   top: 37px;
-  display: inline;
   text-align: center;
+  width: 100%;
 }
 
 .sourceName {
   border-width: 2px;
   border-top: 0px;
   border-style: solid;
-  width: 100%;
   background-color: snow;
+  width: 100%;
 }
 
 .filter {
@@ -48,23 +48,39 @@
 
 .newsWrapper > * {
   display: inline-block;
+  margin-left: 2%;
 }
 
 .newsData * {
+  display: inline;
+}
+
+img {
+  margin-top: 5%;
+  width: 20%;
+  height: 20%;
+  float: left;
+}
+
+.image {
+  margin-bottom: 2%;
+  margin-right: 20%;
+}
+
+.text * {
+  padding-right: 50%;
   display: block;
-  text-align: left;
+}
+
+.date {
+  vertical-align: top;
+}
+
+.control {
+  vertical-align: top;
 }
 
 .control * {
   display: block;
-}
-
-.image {
-  display: inline !important;
-  vertical-align: middle;
-}
-
-.image img {
-  width: 20%;
-  height: 20%;
+  margin-bottom: 7%;
 }
