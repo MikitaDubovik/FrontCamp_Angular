@@ -58,6 +58,7 @@
 img {
   margin-top: 3%;
   margin-left: 5%;
+  margin-bottom: 3%;
   width: 20%;
   height: 20%;
   float: left;
@@ -81,4 +82,13 @@ img {
   margin-bottom: 7%;
   margin-top: 1em;
   margin-right: 5%;
+}
+
+input, select {
+  border-radius: 3px;
+  border-width: 1px;
+}
+
+::ng-deep .mat-checkbox-frame {
+  border-color: #60a3bc;
 }
