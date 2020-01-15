@@ -1,11 +1,12 @@
 <div class="main">
     <div class="sourceName">
-        <h1>Source Name Placeholder</h1>
+        <h1>{{this.title}}</h1>
     </div>
     <div class="filter">
         <div class="header">
-            <select>
-                <option value="0">Select Source Placeholder</option>
+            <select (change)="onChangeObj($event)">
+                <option disabled>Select Source Placeholder</option>
+                <option *ngFor="let source of sources" [value]="source.id">{{source.name}}</option>
             </select>
         </div>
         <div class="search">
