@@ -41,7 +41,7 @@
 .news {
   border-width: 2px;
   border-style: solid;
-  width: 50%;
+  width: 60%;
   display: inline-block;
   margin: 30px;
 }
@@ -56,15 +56,11 @@
 }
 
 img {
-  margin-top: 5%;
+  margin-top: 3%;
+  margin-left: 5%;
   width: 20%;
   height: 20%;
   float: left;
-}
-
-.image {
-  margin-bottom: 2%;
-  margin-right: 20%;
 }
 
 .text * {
@@ -83,4 +79,6 @@ img {
 .control * {
   display: block;
   margin-bottom: 7%;
+  margin-top: 1em;
+  margin-right: 5%;
 }
