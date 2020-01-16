@@ -30,7 +30,6 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule
   ],
   exports: [
-    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

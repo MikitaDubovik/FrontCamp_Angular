@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Source } from 'src/app/models/source';
+import { Source } from '../../models/source'
+import { Response } from '../../models/response'
+import { Article } from 'src/app/models/article';
+
+import { map } from 'rxjs/operators';
 
 const apiKey = '&apiKey=980e9d4359984b1bb923d5e1043ce9e2';
 const baseUrl = 'https://newsapi.org/';
@@ -15,13 +18,13 @@ export class ApiService {
 
   }
 
-  getSources(): Observable<Source[]> {
+  getSources() {
     let url = baseUrl + 'v2/sources?country=gb' + apiKey;
-    return this.http.get<Source[]>(url);
+    return this.http.get(url).pipe(map((obj: Response<Source[]>) => obj.sources));
   }
 
-  getArticles(id: number) {
+  getArticles(id: string) {
     let url = baseUrl + `v1/articles?source=${id}` + apiKey;
-    return this.http.get(url);
+    return this.http.get(url).pipe(map((obj: Response<Article[]>) => obj.articles));
   }
 }

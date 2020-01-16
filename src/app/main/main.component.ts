@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api/api.service'
 import { Source } from '../models/source';
+import { Article } from '../models/article';
 
 @Component({
   selector: 'app-main',
@@ -10,6 +11,7 @@ import { Source } from '../models/source';
 export class MainComponent implements OnInit {
 
   sources: Source[];
+  articles: Article[];
   title: string;
 
   constructor(private apiService: ApiService) { }
@@ -18,16 +20,18 @@ export class MainComponent implements OnInit {
     this.title = 'Please, choose source';
     this.apiService.getSources().subscribe(
       resp => {
-        console.log(resp);
-        this.sources = resp.sources;
-        console.log(this.sources);
+        this.sources = resp;
       }
     );
   }
 
   onChangeObj(selectedSource) {
     let id = selectedSource.target.value
-    this.apiService.getArticles(id).subscribe(resp => { console.log(resp) });
+    this.apiService.getArticles(id).subscribe(
+      resp => {
+        let a = resp;
+      }
+    );
     this.title = this.sources.find(s => s.id === id).name;
   }
 
