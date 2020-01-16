@@ -23,17 +23,14 @@
     <div class="source">
         <div class="news" *ngFor="let article of articles">
             <div class="newsWrapper">
-                <figure style="display: inline">
-                    <img src={article.url}>
-                </figure>
+                <img [src]="article.urlToImage">
                 <div class="text">
-                    <p>Newsline placeholder</p>
-                    <p>Data placeholder</p>
-                    <a>Read more placeholder</a>
+                    <p>{{article.title}}</p>
+                    <p>{{article.description}}</p>
+                    <a [href]="article.url">Read more</a>
                 </div>
-
                 <div class="date">
-                    <p>Date placeholder</p>
+                    <p>{{article.publishedAt}}</p>
                 </div>
                 <div class="control">
                     <button class="button">Edit</button>

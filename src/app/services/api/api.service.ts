@@ -20,11 +20,11 @@ export class ApiService {
 
   getSources() {
     let url = baseUrl + 'v2/sources?country=gb' + apiKey;
-    return this.http.get(url).pipe(map((obj: Response<Source[]>) => obj.sources));
+    return this.http.get<Response<Source[]>>(url).pipe(map((obj => obj.sources)));
   }
 
   getArticles(id: string) {
     let url = baseUrl + `v1/articles?source=${id}` + apiKey;
-    return this.http.get(url).pipe(map((obj: Response<Article[]>) => obj.articles));
+    return this.http.get<Response<Article[]>>(url).pipe(map(obj => obj.articles));
   }
 }

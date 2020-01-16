@@ -29,7 +29,7 @@ export class MainComponent implements OnInit {
     let id = selectedSource.target.value
     this.apiService.getArticles(id).subscribe(
       resp => {
-        let a = resp;
+        this.articles = resp;
       }
     );
     this.title = this.sources.find(s => s.id === id).name;
