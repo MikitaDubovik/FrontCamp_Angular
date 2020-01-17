@@ -4,10 +4,11 @@
     </div>
     <div class="filter">
         <div class="header">
-            <select (change)="onChangeObj($event)">
-                <option disabled>Select Source Placeholder</option>
-                <option *ngFor="let source of sources" [value]="source.id">{{source.name}}</option>
-            </select>
+            <mat-select placeholder="Select Source Placeholder" (selectionChange)="onChangeObj($event)">
+                <mat-option *ngFor="let source of sources" [value]="source.id">
+                    {{source.name}}
+                </mat-option>
+            </mat-select>
         </div>
         <div class="search">
             <input type="text" placeholder="Type your text" />
@@ -30,7 +31,7 @@
                     <a [href]="article.url">Read more</a>
                 </div>
                 <div class="date">
-                    <p>{{article.publishedAt}}</p>
+                    <p>{{article.publishedAt | date:'shortTime' }}</p>
                 </div>
                 <div class="control">
                     <button class="button">Edit</button>

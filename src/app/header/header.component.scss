@@ -1,9 +1,9 @@
 .header {
-  border-width: 2px;
-  border-style: solid;
-  position: absolute;
+  position: fixed;
   top: 0;
   width: 100%;
+  background-color: #A3D9D9;
+  z-index: 1;
 }
 
 img {

@@ -26,12 +26,13 @@ export class MainComponent implements OnInit {
   }
 
   onChangeObj(selectedSource) {
-    let id = selectedSource.target.value
+    let id = selectedSource.value
     this.apiService.getArticles(id).subscribe(
       resp => {
         this.articles = resp;
       }
     );
+
     this.title = this.sources.find(s => s.id === id).name;
   }
 
