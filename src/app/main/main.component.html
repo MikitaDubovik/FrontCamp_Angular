@@ -23,8 +23,7 @@
     </div>
     <div class="source">
         <div *ngIf="articles">
-            <div class="news"
-                *ngFor="let article of articles | paginate: {itemsPerPage: 5, currentPage: 1, totalItems: articles.length}">
+            <div class="news" *ngFor="let article of articles | slice:0:articleIndex">
                 <div class="newsWrapper">
                     <img [src]="article.urlToImage">
                     <div class="text">
@@ -41,9 +40,10 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="loadMore" *ngIf="articles && articles.lenght > 5">
-            <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+
+            <div class="loadMore" *ngIf="articles && articleIndex < articles.length">
+                <button mat-raised-button (click)="loadMore()">Load more</button>
+            </div>
         </div>
     </div>
 </div>

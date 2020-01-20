@@ -13,7 +13,7 @@ export class MainComponent implements OnInit {
   sources: Source[];
   articles: Article[];
   title: string;
-  config: any;
+  articleIndex: number;
 
   constructor(private apiService: ApiService) {
   }
@@ -32,18 +32,14 @@ export class MainComponent implements OnInit {
     this.apiService.getArticles(id).subscribe(
       resp => {
         this.articles = resp;
-        this.config = {
-          itemsPerPage: 5,
-          currentPage: 1,
-          totalItems: this.articles.length
-        };
+        this.articleIndex = 4;
       }
     );
 
     this.title = this.sources.find(s => s.id === id).name;
   }
 
-  pageChanged(event) {
-    this.config.currentPage = event;
+  loadMore() {
+    this.articleIndex += 5;
   }
 }

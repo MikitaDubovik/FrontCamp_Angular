@@ -8,10 +8,9 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
 import { MainComponent } from './main/main.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { MatCheckboxModule, MatSelectModule } from '@angular/material';
+import { MatCheckboxModule, MatSelectModule, MatButtonModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -30,7 +29,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     MatSelectModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    NgxPaginationModule
+    MatButtonModule
   ],
   exports: [
   ],
