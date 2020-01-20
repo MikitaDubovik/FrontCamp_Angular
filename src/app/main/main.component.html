@@ -4,21 +4,25 @@
     </div>
     <div class="filter">
         <div class="header">
-            <mat-select placeholder="Select Source Placeholder" (selectionChange)="onChangeObj($event)">
-                <mat-option *ngFor="let source of sources" [value]="source.id">
-                    {{source.name}}
-                </mat-option>
-            </mat-select>
+            <mat-form-field>
+                <mat-select placeholder="Select Source" (selectionChange)="onChangeObj($event)">
+                    <mat-option *ngFor="let source of sources" [value]="source.id">
+                        {{source.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
         </div>
         <div class="search">
-            <input type="text" placeholder="Type your text" />
-            <button class="button">Filter</button>
+            <mat-form-field>
+                <input matInput placeholder="Type header" />
+            </mat-form-field>
+            <button mat-raised-button color="green" class="button">Filter</button>
         </div>
         <div>
             <mat-checkbox>Only created by me</mat-checkbox>
         </div>
         <div>
-            <button class="button">Add Article</button>
+            <button mat-raised-button color="green" class="button">Add Article</button>
         </div>
     </div>
     <div class="source">
@@ -35,8 +39,8 @@
                         <p>{{article.publishedAt | date:'shortTime' }}</p>
                     </div>
                     <div class="control" *ngIf="article.createdByMe">
-                        <button class="button">Edit</button>
-                        <button class="button">Delete</button>
+                        <button mat-raised-button color="primary" class="button">Edit</button>
+                        <button mat-raised-button color="primary" class="button">Delete</button>
                     </div>
                 </div>
             </div>

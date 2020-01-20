@@ -21,7 +21,7 @@ $border-style: solid;
 }
 
 .filter {
-  background-color: #d0f8f8;
+  background-color: #fafafa;
   border-color: rgb(242, 245, 241);
   border-width: 1px;
   border-top: 0px;
@@ -100,24 +100,15 @@ img {
   margin-right: 5%;
 }
 
-input,
-.mat-select {
-  border-radius: 5px;
-  border-width: 1px;
-  min-height: 25px;
+.mat-green {
+  background-color: #a6dd8f;
 }
 
 ::ng-deep .mat-select-value,
-::ng-deep .mat-select-placeholder {
-  color: $text-color;
-}
-
-.mat-select {
-  width: 250px;
-  border-style: $border-style;
-  background-color: white;
+::ng-deep .mat-select-placeholder,
+::ng-deep .mat-input-element,
+::ng-deep .mat-form-field-label {
   color: $text-color !important;
-  border-color: $border-color;
 }
 
 ::ng-deep .mat-checkbox-frame {

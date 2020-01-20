@@ -8,10 +8,9 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
 import { MainComponent } from './main/main.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { MatCheckboxModule, MatSelectModule, MatButtonModule } from '@angular/material';
+import { MatCheckboxModule, MatSelectModule, MatButtonModule, MatInputModule, MatFormFieldModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-
 
 @NgModule({
   declarations: [
@@ -29,7 +28,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatSelectModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MatButtonModule
+    MatButtonModule,
+    MatInputModule,
+    MatFormFieldModule
   ],
   exports: [
   ],
