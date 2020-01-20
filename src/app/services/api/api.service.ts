@@ -23,8 +23,8 @@ export class ApiService {
     return this.http.get<Response<Source[]>>(url).pipe(map((obj => obj.sources)));
   }
 
-  getArticles(id: string) {
-    let url = baseUrl + `v1/articles?source=${id}` + apiKey;
+  getArticles(id: string, page: number) {
+    let url = baseUrl + `v2/top-headlines?sources=${id}&page=${page}&pageSize=5` + apiKey;
     return this.http.get<Response<Article[]>>(url).pipe(map(obj => obj.articles));
   }
 }

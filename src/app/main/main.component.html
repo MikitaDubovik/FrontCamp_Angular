@@ -23,7 +23,7 @@
     </div>
     <div class="source">
         <div *ngIf="articles">
-            <div class="news" *ngFor="let article of articles | slice:0:articleIndex">
+            <div class="news" *ngFor="let article of articles">
                 <div class="newsWrapper">
                     <img [src]="article.urlToImage">
                     <div class="text">
@@ -41,7 +41,7 @@
                 </div>
             </div>
 
-            <div class="loadMore" *ngIf="false; else disabledButton">
+            <div class="loadMore" *ngIf="isAdded; else disabledButton">
                 <button mat-raised-button (click)="loadMore()">Load more</button>
             </div>
 

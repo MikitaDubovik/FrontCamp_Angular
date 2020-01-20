@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ApiService } from '../services/api/api.service'
 import { Source } from '../models/source';
 import { Article } from '../models/article';
@@ -9,11 +9,13 @@ import { Article } from '../models/article';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-
+  @Input() isAdded: boolean;
   sources: Source[];
+  sourceId: string;
   articles: Article[];
   title: string;
-  articleIndex: number;
+  articlePage: number;
+
 
   constructor(private apiService: ApiService) {
   }
@@ -28,18 +30,32 @@ export class MainComponent implements OnInit {
   }
 
   onChangeObj(selectedSource) {
-    let id = selectedSource.value
-    this.apiService.getArticles(id).subscribe(
+    this.sourceId = selectedSource.value
+    this.apiService.getArticles(this.sourceId, 1).subscribe(
       resp => {
-        this.articles = resp;
-        this.articleIndex = 5;
+        if (resp.length > 0) {
+          this.articles = resp;
+          this.articlePage = 1;
+          this.isAdded = true;
+        } else {
+          alert('NEWS API IS BROKEN');
+        }
       }
     );
 
-    this.title = this.sources.find(s => s.id === id).name;
+    this.title = this.sources.find(s => s.id === this.sourceId).name;
   }
 
   loadMore() {
-    this.articleIndex += 5;
+    this.articlePage++;
+    this.apiService.getArticles(this.sourceId, this.articlePage).subscribe(
+      resp => {
+        if (resp.length > 0) {
+          this.articles.push(...resp);
+        } else {
+          this.isAdded = false;
+        }
+      }
+    );
   }
 }
