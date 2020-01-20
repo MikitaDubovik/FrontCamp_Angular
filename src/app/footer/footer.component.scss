@@ -1,11 +1,12 @@
 .footer {
-  border-width: 2px;
+  border-width: 1px;
   position: fixed;
   bottom: 0;
   width: 100%;
   border-style: solid;
   background-color: #A3D9D9;
   border-color: rgb(242, 245, 241);
+  margin-left: -8px;
 }
 
 .footer .footerLogo {
