@@ -32,7 +32,7 @@ export class MainComponent implements OnInit {
     this.apiService.getArticles(id).subscribe(
       resp => {
         this.articles = resp;
-        this.articleIndex = 4;
+        this.articleIndex = 5;
       }
     );
 

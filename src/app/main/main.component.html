@@ -41,9 +41,15 @@
                 </div>
             </div>
 
-            <div class="loadMore" *ngIf="articles && articleIndex < articles.length">
+            <div class="loadMore" *ngIf="false; else disabledButton">
                 <button mat-raised-button (click)="loadMore()">Load more</button>
             </div>
+
+            <ng-template #disabledButton>
+                <div class="loadMore">
+                    <button mat-stroked-button disabled>Load more</button>
+                </div>
+            </ng-template>
         </div>
     </div>
 </div>
