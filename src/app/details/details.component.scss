@@ -1,0 +1,21 @@
+$border-color: #60a3bc;
+$text-color: black;
+$border-style: solid;
+
+.main {
+  position: absolute;
+  top: 31px;
+  text-align: center;
+  width: 100%;
+  margin-left: -8px;
+  overflow-x: hidden;
+}
+
+.sourceName {
+  border-width: 2px;
+  border-top: 0px;
+  border-style: $border-style;
+  background-color: #f1cfd7;
+  border-color: #f1d8de;
+  width: 100%;
+}

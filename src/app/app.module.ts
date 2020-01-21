@@ -12,6 +12,7 @@ import { MatCheckboxModule, MatSelectModule, MatButtonModule, MatInputModule, Ma
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { DetailsComponent } from './details/details.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FormsModule } from '@angular/forms';
     SidebarComponent,
     FooterComponent,
     MainComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,

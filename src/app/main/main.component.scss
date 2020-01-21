@@ -29,7 +29,7 @@ $border-style: solid;
   width: 100%;
 }
 
-.filter * {
+.filter > div {
   display: inline-block;
   margin: 2%;
 }
@@ -38,9 +38,9 @@ $border-style: solid;
   display: inline;
 }
 
-.search * {
-  margin-right: 2px;
-  margin-left: 2px;
+.search mat-form-field {
+  margin-right: 7px;
+  margin-left: 7px;
 }
 
 .source {
@@ -61,17 +61,12 @@ $border-style: solid;
   display: flex;
 }
 
-.newsWrapper > 
-img,
+.newsWrapper > img,
 .text,
 .date,
 .control {
   display: inline-block;
   margin-left: 2%;
-}
-
-.newsData * {
-  display: inline;
 }
 
 img {
@@ -84,7 +79,7 @@ img {
   float: left;
 }
 
-.text * {
+.text p, a {
   display: block;
   text-align: left;
 }
@@ -97,11 +92,12 @@ img {
   vertical-align: top;
 }
 
-.control * {
+.control button {
   display: block;
   margin-bottom: 7%;
   margin-top: 1em;
   margin-right: 5%;
+  min-width: 80px;
 }
 
 .mat-green {
