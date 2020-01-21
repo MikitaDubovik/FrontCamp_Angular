@@ -15,6 +15,7 @@ export class MainComponent implements OnInit {
   articles: Article[];
   title: string;
   articlePage: number;
+  filterInput: string;
 
 
   constructor(private apiService: ApiService) {
@@ -37,6 +38,7 @@ export class MainComponent implements OnInit {
           this.articles = resp;
           this.articlePage = 1;
           this.isAdded = true;
+          this.filterInput = "";
         } else {
           alert('NEWS API IS BROKEN');
         }
@@ -51,11 +53,23 @@ export class MainComponent implements OnInit {
     this.apiService.getArticles(this.sourceId, this.articlePage).subscribe(
       resp => {
         if (resp.length > 0) {
-          this.articles.push(...resp);
+          if (this.filterInput) {
+            if (resp.find(art => art.title.includes(this.filterInput))) {
+              this.articles.push(...resp.filter(art => art.title.includes(this.filterInput)));
+            } else {
+              this.isAdded = false;
+            }
+          } else {
+            this.articles.push(...resp);
+          }
         } else {
           this.isAdded = false;
         }
       }
     );
+  }
+
+  filter() {
+    this.articles = this.articles.filter(art => art.title.includes(this.filterInput));
   }
 }

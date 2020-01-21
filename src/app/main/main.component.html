@@ -14,15 +14,15 @@
         </div>
         <div class="search">
             <mat-form-field>
-                <input matInput placeholder="Type header" />
+                <input matInput [(ngModel)]="filterInput" placeholder="Type header" />
             </mat-form-field>
-            <button mat-raised-button color="green" class="button">Filter</button>
+            <button mat-raised-button color="green" (click)="filter()">Filter</button>
         </div>
         <div>
             <mat-checkbox>Only created by me</mat-checkbox>
         </div>
         <div>
-            <button mat-raised-button color="green" class="button">Add Article</button>
+            <button mat-raised-button color="green">Add Article</button>
         </div>
     </div>
     <div class="source">
@@ -39,8 +39,8 @@
                         <p>{{article.publishedAt | date:'shortTime' }}</p>
                     </div>
                     <div class="control" *ngIf="article.createdByMe">
-                        <button mat-raised-button color="primary" class="button">Edit</button>
-                        <button mat-raised-button color="primary" class="button">Delete</button>
+                        <button mat-raised-button color="primary">Edit</button>
+                        <button mat-raised-button color="primary">Delete</button>
                     </div>
                 </div>
             </div>
