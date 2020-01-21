@@ -1,3 +1,6 @@
+$text-color: black;
+$border-color: #60a3bc;
+
 @font-face {
   font-family: "Open Sans";
   font-style: normal;
@@ -12,4 +15,8 @@
 
 body {
   margin: 0;
+}
+
+.mat-green {
+  background-color: #a6dd8f;
 }

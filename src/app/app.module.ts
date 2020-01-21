@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { DetailsComponent } from './details/details.component';
+import { FilterComponent } from './main/filter/filter.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { DetailsComponent } from './details/details.component';
     FooterComponent,
     MainComponent,
     NotFoundComponent,
-    DetailsComponent
+    DetailsComponent,
+    FilterComponent
   ],
   imports: [
     BrowserModule,

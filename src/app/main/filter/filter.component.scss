@@ -1,0 +1,32 @@
+$border-color: #60a3bc;
+$text-color: black;
+$border-style: solid;
+
+.filter {
+  background-color: #fafafa;
+  border-color: rgb(242, 245, 241);
+  border-width: 1px;
+  border-top: 0px;
+  border-style: $border-style;
+}
+
+.filter > div {
+  display: inline-block;
+  margin: 2%;
+}
+
+.search mat-form-field {
+  margin-right: 7px;
+  margin-left: 7px;
+}
+
+::ng-deep .mat-select-value,
+::ng-deep .mat-select-placeholder,
+::ng-deep .mat-input-element,
+::ng-deep .mat-form-field-label {
+  color: $text-color !important;
+}
+
+::ng-deep .mat-checkbox-frame {
+  border-color: $border-color;
+}
