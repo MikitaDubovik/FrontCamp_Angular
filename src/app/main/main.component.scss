@@ -61,7 +61,11 @@ $border-style: solid;
   display: flex;
 }
 
-.newsWrapper > * {
+.newsWrapper > 
+img,
+.text,
+.date,
+.control {
   display: inline-block;
   margin-left: 2%;
 }
