@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ApiService } from '../services/api/api.service'
+import { ApiService } from '../services/api/api.service';
 import { Source } from '../models/source';
 import { Article } from '../models/article';
 
@@ -20,13 +20,13 @@ export class MainComponent implements OnInit {
   articlePage: number;
   filterInput: string;
 
-  //Const
+  // Const
   myTitle: string;
   defaulTitle: string;
 
   constructor(private apiService: ApiService) {
     this.myTitle = 'AMASING NEWS';
-    this.defaulTitle = 'Please, choose source'
+    this.defaulTitle = 'Please, choose source';
   }
 
   ngOnInit() {
@@ -39,7 +39,7 @@ export class MainComponent implements OnInit {
   }
 
   onChangeSource(selectedSource) {
-    this.sourceId = selectedSource.value
+    this.sourceId = selectedSource.value;
     this.apiService.getArticles(this.sourceId, 1).subscribe(
       resp => {
         if (resp.length > 0) {
@@ -61,16 +61,16 @@ export class MainComponent implements OnInit {
   loadMore() {
     this.articlePage++;
 
-    //For future task with own DB
-    //Add check for Load More button
+    // For future task with own DB
+    // Add check for Load More button
     if (this.createdByMe) {
       this.createdByMeFilter(true);
-      //this.originalArticles = this.nodeService.getArticles(this.articlePage);
+      // this.originalArticles = this.nodeService.getArticles(this.articlePage);
     } else {
       this.apiService.getArticles(this.sourceId, this.articlePage).subscribe(
         resp => {
           if (resp.length > 0) {
-            this.originalArticles.push(...resp) //added for all cases
+            this.originalArticles.push(...resp); // added for all cases
 
             if (this.filterInput) {
               if (resp.find(r => r.title.includes(this.filterInput))) {
@@ -78,7 +78,7 @@ export class MainComponent implements OnInit {
               } else {
                 this.isAdded = false;
               }
-            } else { //if no filterInput
+            } else { // if no filterInput
               this.articles = this.originalArticles;
             }
           } else {
@@ -101,8 +101,7 @@ export class MainComponent implements OnInit {
     if (selectedOption) {
       this.title = this.myTitle;
       this.articles = this.articles ? this.articles.filter(art => art.createdByMe) : null;
-    }
-    else {
+    } else {
       this.setSourceTitle();
       this.globalFilter();
     }
