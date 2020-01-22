@@ -2,7 +2,13 @@
     <div class="sourceName">
         <h1>{{this.title}}</h1>
     </div>
-    <app-filter></app-filter>
+    <app-filter
+     [sources]="sources"
+     (changeSource)="receiveSourceId($event)"
+     (clickFilterButton)="receiveGlobalFilter($event)"
+     (clickCreatedByMeCheckbox)="receiveCreatedByMeFilter($event)"
+    ></app-filter
+    >
     <div class="source">
         <div *ngIf="articles">
             <div class="news" *ngFor="let article of articles">

@@ -38,8 +38,26 @@ export class MainComponent implements OnInit {
     );
   }
 
-  onChangeSource(selectedSource) {
-    this.sourceId = selectedSource.value;
+  receiveSourceId($event) {
+    this.sourceId = $event;
+
+    this.setInitialArticles();
+  }
+
+
+  receiveGlobalFilter($event) {
+    this.filterInput = $event;
+
+    this.globalFilter();
+  }
+
+  receiveCreatedByMeFilter($event) {
+    this.createdByMe = $event;
+
+    this.createdByMeFilter(this.createdByMe);
+  }
+
+  setInitialArticles() {
     this.apiService.getArticles(this.sourceId, 1).subscribe(
       resp => {
         if (resp.length > 0) {
