@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Source } from 'src/app/models/source';
-import { Article } from 'src/app/models/article';
 
 @Component({
   selector: 'app-filter',

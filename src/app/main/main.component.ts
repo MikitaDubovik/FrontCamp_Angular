@@ -2,12 +2,14 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ApiService } from '../services/api/api.service';
 import { Source } from '../models/source';
 import { Article } from '../models/article';
+import { StateService } from '../services/state/state.service';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
+
 export class MainComponent implements OnInit {
 
   @Input() isAdded: boolean;
@@ -24,13 +26,14 @@ export class MainComponent implements OnInit {
   myTitle: string;
   defaulTitle: string;
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, private stateService: StateService) {
     this.myTitle = 'AMASING NEWS';
     this.defaulTitle = 'Please, choose source';
   }
 
   ngOnInit() {
     this.title = this.defaulTitle;
+
     this.apiService.getSources().subscribe(
       resp => {
         this.sources = resp;
@@ -131,5 +134,10 @@ export class MainComponent implements OnInit {
     } else {
       this.title = this.defaulTitle;
     }
+  }
+
+  sendArticleData(artilce) {
+    this.stateService.changeArticle(artilce);
+    this.stateService.changeTitle(this.title);
   }
 }
