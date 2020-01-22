@@ -19,12 +19,21 @@ export class ApiService {
   }
 
   getSources() {
-    const url = baseUrl + 'v2/sources?country=gb' + apiKey;
+    const url = this.createUrl('v2/sources?country=gb');
     return this.http.get<Response<Source[]>>(url).pipe(map((obj => obj.sources)));
   }
 
   getArticles(id: string, page: number) {
-    const url = baseUrl + `v2/top-headlines?sources=${id}&page=${page}&pageSize=5` + apiKey;
+    const url = this.createUrl(`v2/top-headlines?sources=${id}&page=${page}&pageSize=5`);
     return this.http.get<Response<Article[]>>(url).pipe(map(obj => obj.articles));
+  }
+
+  getArticleByTitle(title: string) {
+    const url = this.createUrl(`v2/top-headlines?q=${title}`);
+    return this.http.get<Response<Article[]>>(url).pipe(map(obj => obj.articles));
+  }
+
+  private createUrl(details: string) {
+    return baseUrl + details + apiKey;
   }
 }

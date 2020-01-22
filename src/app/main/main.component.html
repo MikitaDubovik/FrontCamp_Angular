@@ -12,21 +12,8 @@
     <div class="source">
         <div *ngIf="articles">
             <div class="news" *ngFor="let article of articles">
-                <div class="newsWrapper">
-                    <img [src]="article.urlToImage">
-                    <div class="text">
-                        <p>{{article.title}}</p>
-                        <p>{{article.description | slice : 0:90}}...</p>
-                        <a (click)="sendArticleData(article)" routerLink="/details">Read more</a>
-                    </div>
-                    <div class="date">
-                        <p>{{article.publishedAt | date:'shortTime' }}</p>
-                    </div>
-                    <div class="control" *ngIf="article.createdByMe">
-                        <button mat-raised-button color="primary">Edit</button>
-                        <button mat-raised-button color="primary">Delete</button>
-                    </div>
-                </div>
+                <app-news-card [article]="article">                
+                </app-news-card>
             </div>
 
             <div class="loadMore" *ngIf="isAdded; else disabledButton">

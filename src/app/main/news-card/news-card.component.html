@@ -1,0 +1,15 @@
+<div class="newsWrapper">
+    <img [src]="article.urlToImage">
+    <div class="text">
+        <p>{{article.title}}</p>
+        <p>{{article.description | slice : 0:90}}...</p>
+        <a [routerLink]="['/details', article.title]">Read more</a>
+    </div>
+    <div class="date">
+        <p>{{article.publishedAt | date:'shortTime' }}</p>
+    </div>
+    <div class="control" *ngIf="article.createdByMe">
+        <button mat-raised-button color="primary">Edit</button>
+        <button mat-raised-button color="primary">Delete</button>
+    </div>
+</div>

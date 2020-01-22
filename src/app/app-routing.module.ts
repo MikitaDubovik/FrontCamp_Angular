@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: '', component: MainComponent },
   { path: 'contact', component: SidebarComponent },
   { path: '404', component: NotFoundComponent },
-  { path: 'details', component: DetailsComponent },
+  { path: 'details/:title', component: DetailsComponent },
   { path: '**', redirectTo: '/404' }
 ];
 

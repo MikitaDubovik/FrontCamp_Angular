@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { StateService } from '../services/state/state.service';
 import { Article } from '../models/article';
+import { ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
+import { ApiService } from '../services/api/api.service';
 
 @Component({
   selector: 'app-main',
@@ -11,12 +14,15 @@ import { Article } from '../models/article';
 export class DetailsComponent implements OnInit {
 
   article: Article;
-  title: string;
 
-  constructor(private state: StateService) { }
+  constructor(private state: StateService, private route: ActivatedRoute, private apiService: ApiService) { }
 
   ngOnInit() {
-    this.state.currentArticle.subscribe(article => this.article = article);
-    this.state.currentTitle.subscribe(title => this.title = title);
+    this.route.paramMap.pipe(
+      switchMap(params => {
+        const title = params.get('title');
+        return this.apiService.getArticleByTitle(title);
+      })
+    ).subscribe(resp => this.article = resp[0]);
   }
 }

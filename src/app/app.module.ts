@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { DetailsComponent } from './details/details.component';
 import { FilterComponent } from './main/filter/filter.component';
+import { NewsCardComponent } from './main/news-card/news-card.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { FilterComponent } from './main/filter/filter.component';
     MainComponent,
     NotFoundComponent,
     DetailsComponent,
-    FilterComponent
+    FilterComponent,
+    NewsCardComponent
   ],
   imports: [
     BrowserModule,

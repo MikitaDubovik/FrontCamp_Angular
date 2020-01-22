@@ -135,9 +135,4 @@ export class MainComponent implements OnInit {
       this.title = this.defaulTitle;
     }
   }
-
-  sendArticleData(artilce) {
-    this.stateService.changeArticle(artilce);
-    this.stateService.changeTitle(this.title);
-  }
 }
