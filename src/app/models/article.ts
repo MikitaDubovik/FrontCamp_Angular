@@ -4,4 +4,5 @@ export class Article {
     description: string;
     publishedAt: Date;
     createdByMe: boolean;
+    author: string;
 }
