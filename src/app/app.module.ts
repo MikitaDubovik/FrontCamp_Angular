@@ -8,6 +8,13 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
 import { MainComponent } from './main/main.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { MatCheckboxModule, MatSelectModule, MatButtonModule, MatInputModule, MatFormFieldModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { DetailsComponent } from './details/details.component';
+import { FilterComponent } from './main/filter/filter.component';
+import { NewsCardComponent } from './main/news-card/news-card.component';
 
 @NgModule({
   declarations: [
@@ -16,11 +23,24 @@ import { NotFoundComponent } from './not-found/not-found.component';
     SidebarComponent,
     FooterComponent,
     MainComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    DetailsComponent,
+    FilterComponent,
+    NewsCardComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatCheckboxModule,
+    MatSelectModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    MatButtonModule,
+    MatInputModule,
+    MatFormFieldModule,
+    FormsModule
+  ],
+  exports: [
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,1 +1,22 @@
-/* You can add global styles to this file, and also import other style files */
+$text-color: black;
+$border-color: #60a3bc;
+
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./assets/fonts/open-sans-v17-latin-regular.woff2") format("woff2"),
+    url("./assets/fonts/open-sans-v17-latin-regular.woff") format("woff");
+}
+
+.main, .header, .footer {
+  font-family: "Open Sans";
+}
+
+body {
+  margin: 0;
+}
+
+.mat-green {
+  background-color: #a6dd8f;
+}

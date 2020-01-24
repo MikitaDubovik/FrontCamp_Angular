@@ -1,0 +1,24 @@
+<div class="main">
+    <div class="sourceName">
+        <h1>{{article.source.name}}</h1>
+    </div>
+    <div class="source">
+        <div class="news">
+            <div class="newsWrapper">
+                <img [src]="article.urlToImage">
+                <div class="text">
+                    <p>{{article.title}}</p>
+                    <p>{{article.description}}</p>
+                    <div class="date">
+                        <p>Date: {{article.publishedAt | date:'short' }}</p>
+                    </div>
+                    <p>{{article.author}}</p>
+                </div>
+                <div class="control" *ngIf="article.createdByMe">
+                    <button mat-raised-button color="primary">Edit</button>
+                    <button mat-raised-button color="primary">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
