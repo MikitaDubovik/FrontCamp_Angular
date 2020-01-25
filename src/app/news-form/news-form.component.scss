@@ -7,18 +7,46 @@ $border-style: solid;
   border-width: 2px;
   border-style: $border-style;
   border-radius: 10px;
-  width: 70%;
+  width: 50%;
   display: inline-block;
   margin: 40px;
 }
 
-form > .leftPart,
-.rightPart {
-  display: inline-block;
-  height: 100%;
+form {
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 500px 400px;
 }
 
-.leftPart > label,
-.rightPart > label {
+form > .leftPart,
+form > .rightPart {
+  text-align: left;
+  margin-left: 220px;
+}
+
+form .rightPart {
+  margin-left: 120px;
+}
+
+.leftPart > mat-form-field,
+.rightPart > mat-form-field,
+.rightPart > .buttons {
   display: block;
+}
+
+.cancel {
+  margin-left: 50px;
+}
+
+input,
+textarea {
+  border-style: $border-style;
+  border-bottom: none;
+  border-color: #a3d9d9;
+  border-top: none;
+  border-radius: 3px;
+}
+
+.buttons {
+  padding-bottom: 20px;
 }

@@ -1,46 +1,46 @@
 <div class="form">
-    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="newsForm" (ngSubmit)="onSubmit()">
         <div class="leftPart">
-            <label>Heading
-                <mat-form-field>
+            <mat-form-field>
+                <label>Heading
                     <input matInput formControlName="heading" />
-                </mat-form-field>
-            </label>
-            <label>Short description
-                <mat-form-field>
+                </label>
+            </mat-form-field>
+            <mat-form-field>
+                <label>Short description
                     <input matInput formControlName="description" />
-                </mat-form-field>
-            </label>
-            <label>Content
-                <mat-form-field>
-                    <input matInput formControlName="content" />
-                </mat-form-field>
-            </label>
+                </label>
+            </mat-form-field>
+            <mat-form-field>
+                <label>Content
+                    <textarea matInput formControlName="content" rows="5"></textarea>
+                </label>
+            </mat-form-field>
         </div>
         <div class="rightPart">
-            <label>Image
-                <mat-form-field>
+            <mat-form-field>
+                <label>Image
                     <input matInput formControlName="image" />
-                </mat-form-field>
-            </label>
-            <label>Date
-                <mat-form-field>
+                </label>
+            </mat-form-field>
+            <mat-form-field>
+                <label>Date
                     <input matInput formControlName="data" />
-                </mat-form-field>
-            </label>
-            <label>Author
-                <mat-form-field>
+                </label>
+            </mat-form-field>
+            <mat-form-field>
+                <label>Author
                     <input matInput formControlName="author" />
-                </mat-form-field>
-            </label>
-            <label>Source URL
-                <mat-form-field>
+                </label>
+            </mat-form-field>
+            <mat-form-field>
+                <label>Source url
                     <input matInput formControlName="url" />
-                </mat-form-field>
-            </label>
-
-            <button mat-raised-button color="green" type="submit" [disabled]="!profileForm.valid">Save</button>
-            <button mat-raised-button routerLink="../404">Cancel</button>
+                </label>
+            </mat-form-field>
+            <div class="buttons">
+                <button mat-raised-button color="green" type="submit">Save</button>
+                <button mat-raised-button routerLink="../" class="cancel">Cancel</button>
+            </div>
         </div>
-        
     </form>

@@ -9,7 +9,7 @@
         <p>{{article.publishedAt | date:'shortTime' }}</p>
     </div>
     <div class="control" *ngIf="article.createdByMe">
-        <button mat-raised-button color="primary">Edit</button>
+        <button mat-raised-button color="primary" routerLink="/edit">Edit</button>
         <button mat-raised-button color="primary">Delete</button>
     </div>
 </div>
