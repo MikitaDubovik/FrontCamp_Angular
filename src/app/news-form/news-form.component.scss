@@ -1,0 +1,24 @@
+$border-color: #60a3bc;
+$text-color: black;
+$border-style: solid;
+
+.form {
+  border-color: #a3d9d9;
+  border-width: 2px;
+  border-style: $border-style;
+  border-radius: 10px;
+  width: 70%;
+  display: inline-block;
+  margin: 40px;
+}
+
+form > .leftPart,
+.rightPart {
+  display: inline-block;
+  height: 100%;
+}
+
+.leftPart > label,
+.rightPart > label {
+  display: block;
+}

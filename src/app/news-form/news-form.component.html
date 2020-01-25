@@ -1,0 +1,46 @@
+<div class="form">
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+        <div class="leftPart">
+            <label>Heading
+                <mat-form-field>
+                    <input matInput formControlName="heading" />
+                </mat-form-field>
+            </label>
+            <label>Short description
+                <mat-form-field>
+                    <input matInput formControlName="description" />
+                </mat-form-field>
+            </label>
+            <label>Content
+                <mat-form-field>
+                    <input matInput formControlName="content" />
+                </mat-form-field>
+            </label>
+        </div>
+        <div class="rightPart">
+            <label>Image
+                <mat-form-field>
+                    <input matInput formControlName="image" />
+                </mat-form-field>
+            </label>
+            <label>Date
+                <mat-form-field>
+                    <input matInput formControlName="data" />
+                </mat-form-field>
+            </label>
+            <label>Author
+                <mat-form-field>
+                    <input matInput formControlName="author" />
+                </mat-form-field>
+            </label>
+            <label>Source URL
+                <mat-form-field>
+                    <input matInput formControlName="url" />
+                </mat-form-field>
+            </label>
+
+            <button mat-raised-button color="green" type="submit" [disabled]="!profileForm.valid">Save</button>
+            <button mat-raised-button routerLink="../404">Cancel</button>
+        </div>
+        
+    </form>

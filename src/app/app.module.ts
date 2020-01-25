@@ -15,6 +15,10 @@ import { FormsModule } from '@angular/forms';
 import { DetailsComponent } from './details/details.component';
 import { FilterComponent } from './main/filter/filter.component';
 import { NewsCardComponent } from './main/news-card/news-card.component';
+import { EditComponent } from './edit/edit.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CreateComponent } from './create/create.component';
+import { NewsFormComponent } from './news-form/news-form.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +30,10 @@ import { NewsCardComponent } from './main/news-card/news-card.component';
     NotFoundComponent,
     DetailsComponent,
     FilterComponent,
-    NewsCardComponent
+    NewsCardComponent,
+    EditComponent,
+    CreateComponent,
+    NewsFormComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +45,8 @@ import { NewsCardComponent } from './main/news-card/news-card.component';
     MatButtonModule,
     MatInputModule,
     MatFormFieldModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
   ],

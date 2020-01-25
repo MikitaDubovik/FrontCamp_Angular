@@ -16,7 +16,7 @@ export class StateService {
   constructor() { }
 
   changeArticle(article: Article) {
-    this.articleSource.next(article)
+    this.articleSource.next(article);
   }
 
   changeTitle(title: string) {
