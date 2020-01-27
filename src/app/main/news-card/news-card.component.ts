@@ -9,6 +9,7 @@ import { Article } from 'src/app/models/article';
 export class NewsCardComponent implements OnInit {
 
   @Input() article: Article;
+  @Input() createdByMe: boolean;
 
   constructor() { }
 

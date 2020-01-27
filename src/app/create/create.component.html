@@ -3,7 +3,7 @@
         <h1>Create</h1>
     </div>
 
-    <app-news-form>
+    <app-news-form [oldArticle]="oldArticle" (clickSaveButton)="createNews($event)">
 
     </app-news-form>
 

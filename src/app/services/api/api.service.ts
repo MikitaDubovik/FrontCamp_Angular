@@ -4,7 +4,7 @@ import { Source } from '../../models/source';
 import { Response } from '../../models/response';
 import { Article } from 'src/app/models/article';
 
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 
 const apiKey = '&apiKey=980e9d4359984b1bb923d5e1043ce9e2';
 const baseWebUrl = 'https://newsapi.org/';
@@ -42,7 +42,12 @@ export class ApiService {
 
   createNodeArticles(article: Article) {
     const url = this.createNodeUrl();
-    return this.http.post(url, article);
+    return this.http.post<Article>(url, article).pipe(
+      catchError(err => {
+        return err;
+      })
+    ).subscribe((data) => {
+    });
   }
 
   private createWebUrl(details: string) {

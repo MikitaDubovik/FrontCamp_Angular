@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Article } from '../models/article';
+import { ApiService } from '../services/api/api.service';
 
 @Component({
   selector: 'app-create',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateComponent implements OnInit {
 
-  constructor() { }
+  oldArticle: Article;
+
+  constructor(private apiService: ApiService) {
+    this.oldArticle = new Article();
+  }
 
   ngOnInit() {
   }
 
+  createNews($event) {
+    this.apiService.createNodeArticles($event);
+  }
 }

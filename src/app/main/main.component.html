@@ -12,7 +12,7 @@
     <div class="source">
         <div *ngIf="articles">
             <div class="news" *ngFor="let article of articles">
-                <app-news-card [article]="article">                
+                <app-news-card [article]="article" [createdByMe]="createdByMe">                
                 </app-news-card>
             </div>
 

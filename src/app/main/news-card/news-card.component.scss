@@ -1,5 +1,6 @@
 .newsWrapper {
-  display: flex;
+  display: grid;
+  grid-template-columns: 250px 550px 130px 100px;
 }
 
 .newsWrapper > img,
@@ -27,10 +28,12 @@ a {
 }
 
 .date {
+  margin-top: 14px;
   vertical-align: top;
 }
 
 .control {
+  margin-top: 20px;
   vertical-align: top;
 }
 

@@ -5,4 +5,6 @@ export class Article {
     publishedAt: Date;
     createdByMe: boolean;
     author: string;
+    url: string;
+    content: string;
 }
