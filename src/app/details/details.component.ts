@@ -21,7 +21,7 @@ export class DetailsComponent implements OnInit {
     this.route.paramMap.pipe(
       switchMap(params => {
         const title = params.get('title');
-        return this.apiService.getArticleByTitle(title);
+        return this.apiService.getWebArticleByTitle(title);
       })
     ).subscribe(resp => this.article = resp[0]);
   }

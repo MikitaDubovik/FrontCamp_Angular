@@ -61,7 +61,7 @@ export class MainComponent implements OnInit {
   }
 
   setInitialArticles() {
-    this.apiService.getArticles(this.sourceId, 1).subscribe(
+    this.apiService.getWebArticles(this.sourceId, 1).subscribe(
       resp => {
         if (resp.length > 0) {
           this.originalArticles = resp;
@@ -86,9 +86,12 @@ export class MainComponent implements OnInit {
     // Add check for Load More button
     if (this.createdByMe) {
       this.createdByMeFilter(true);
-      // this.originalArticles = this.nodeService.getArticles(this.articlePage);
+      this.apiService.getNodeArticles().subscribe(resp => {
+        this.articles.push(...resp);
+      })
+      // this.originalArticles = this.nodeService.getWebArticles(this.articlePage);
     } else {
-      this.apiService.getArticles(this.sourceId, this.articlePage).subscribe(
+      this.apiService.getWebArticles(this.sourceId, this.articlePage).subscribe(
         resp => {
           if (resp.length > 0) {
             this.originalArticles.push(...resp); // added for all cases
@@ -121,7 +124,13 @@ export class MainComponent implements OnInit {
   createdByMeFilter(selectedOption) {
     if (selectedOption) {
       this.title = this.myTitle;
-      this.articles = this.articles ? this.articles.filter(art => art.createdByMe) : null;
+      this.apiService.getNodeArticles().subscribe(resp => {
+        if (resp.length > 0) {
+          this.articles = resp;
+        } else {
+          this.isAdded = false;
+        }
+      })
     } else {
       this.setSourceTitle();
       this.globalFilter();
