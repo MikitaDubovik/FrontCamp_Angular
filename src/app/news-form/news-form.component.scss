@@ -7,7 +7,8 @@ $border-style: solid;
   border-width: 2px;
   border-style: $border-style;
   border-radius: 10px;
-  width: 50%;
+  min-width: 40%;
+  max-width: 90%;
   display: inline-block;
   margin: 40px;
 }
@@ -15,23 +16,20 @@ $border-style: solid;
 form {
   overflow: hidden;
   display: grid;
-  grid-template-columns: 500px 400px;
+  grid-template-columns: 300px 350px 200px;
 }
 
 form > .leftPart,
 form > .rightPart {
   text-align: left;
-  margin-left: 220px;
-}
-
-form .rightPart {
-  margin-left: 120px;
+  margin-left: 60px;
 }
 
 .leftPart > mat-form-field,
 .rightPart > mat-form-field,
 .rightPart > .buttons {
   display: block;
+  max-width: 15em;
 }
 
 .cancel {
@@ -49,4 +47,10 @@ textarea {
 
 .buttons {
   padding-bottom: 20px;
+}
+
+img {
+  margin-top: 20px;
+  max-width: 160px;
+  max-height: 100px;
 }

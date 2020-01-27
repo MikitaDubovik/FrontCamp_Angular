@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../services/api/api.service';
+import { ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
+import { Article } from '../models/article';
 
 @Component({
   selector: 'app-edit',
@@ -7,10 +11,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditComponent implements OnInit {
 
-  constructor() { }
+  oldArticle: Article;
 
+  constructor(private apiService: ApiService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.paramMap.pipe(
+      switchMap(params => {
+        const title = params.get('title');
+        return this.apiService.getNodeArticleByTitle(title);
+      })
+    ).subscribe(resp => this.oldArticle = resp);
+  }
+
+  updateNews($event) {
+    this.apiService.updateNodeArticle($event);
   }
 
 }

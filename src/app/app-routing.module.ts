@@ -12,8 +12,8 @@ const routes: Routes = [
   { path: '', component: MainComponent },
   { path: 'contact', component: SidebarComponent },
   { path: '404', component: NotFoundComponent },
-  { path: 'details/:title', component: DetailsComponent },
-  { path: 'edit', component: EditComponent },
+  { path: 'details/:title/:createdByMe', component: DetailsComponent },
+  { path: 'edit/:title', component: EditComponent },
   { path: 'create', component: CreateComponent },
   { path: '**', redirectTo: '/404' }
 ];

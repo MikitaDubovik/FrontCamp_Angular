@@ -32,7 +32,7 @@ export class NewsFormComponent implements OnInit {
   }
 
   onSubmit() {
-    let article = new Article();
+    const article = new Article();
     article.urlToImage = this.newsForm.value.image;
     article.title = this.newsForm.value.title;
     article.description = this.newsForm.value.description;

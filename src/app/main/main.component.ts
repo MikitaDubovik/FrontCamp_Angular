@@ -88,7 +88,7 @@ export class MainComponent implements OnInit {
       this.createdByMeFilter(true);
       this.apiService.getNodeArticles().subscribe(resp => {
         this.articles.push(...resp);
-      })
+      });
       // this.originalArticles = this.nodeService.getWebArticles(this.articlePage);
     } else {
       this.apiService.getWebArticles(this.sourceId, this.articlePage).subscribe(
@@ -130,7 +130,7 @@ export class MainComponent implements OnInit {
         } else {
           this.isAdded = false;
         }
-      })
+      });
     } else {
       this.setSourceTitle();
       this.globalFilter();

@@ -22,7 +22,7 @@
                 <label>Image
                     <input matInput formControlName="image" />
                 </label>
-            </mat-form-field>
+            </mat-form-field>           
             <mat-form-field>
                 <label>Date
                     <input matInput formControlName="data" />
@@ -39,8 +39,11 @@
                 </label>
             </mat-form-field>
             <div class="buttons">
-                <button mat-raised-button color="green" type="submit">Save</button>
-                <button mat-raised-button routerLink="../" class="cancel">Cancel</button>
+                <button mat-raised-button color="green" type="submit" [disabled]="newsForm.invalid">Save</button>
+                <button mat-raised-button routerLink="../../" class="cancel">Cancel</button>
             </div>
+        </div>
+        <div class="imagePart">
+            <img [src]="newsForm.value.image" *ngIf="newsForm.value.image">
         </div>
     </form>

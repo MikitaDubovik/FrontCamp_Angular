@@ -1,6 +1,9 @@
 <div class="main">
-    <div class="sourceName">
+    <div class="sourceName" *ngIf="!createdByMe else myTitle">
         <h1>{{article.source.name}}</h1>
+    </div>
+    <div #myTitle class="sourceName" *ngIf="createdByMe else myTitle">
+        <h1>AMASING NEWS!</h1>
     </div>
     <div class="source">
         <div class="news">
@@ -9,14 +12,16 @@
                 <div class="text">
                     <p>{{article.title}}</p>
                     <p>{{article.description}}</p>
-                    <div class="date">
-                        <p>Date: {{article.publishedAt | date:'short' }}</p>
-                    </div>
+                    <p>{{article.content}}</p>
                     <p>{{article.author}}</p>
                 </div>
-                <div class="control" *ngIf="article.createdByMe">
-                    <button mat-raised-button color="primary">Edit</button>
-                    <button mat-raised-button color="primary">Delete</button>
+                <div class="date">
+                    <p>Date: {{article.publishedAt | date:'short' }}</p>
+                </div>
+                <div class="control" *ngIf="createdByMe">
+                    <button mat-raised-button color="primary" [routerLink]="['/edit', article.title]">Edit</button>
+                    <button mat-raised-button color="primary" (click)="delete(article.title)"
+                        routerLink="../">Delete</button>
                 </div>
             </div>
         </div>

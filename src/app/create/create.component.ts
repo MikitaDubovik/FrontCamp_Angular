@@ -13,6 +13,7 @@ export class CreateComponent implements OnInit {
 
   constructor(private apiService: ApiService) {
     this.oldArticle = new Article();
+    this.oldArticle.publishedAt = new Date();
   }
 
   ngOnInit() {

@@ -3,7 +3,7 @@
         <h1>Edit</h1>
     </div>
 
-    <app-news-form>
+    <app-news-form [oldArticle]="oldArticle" (clickSaveButton)="updateNews($event)" *ngIf="oldArticle">
 
     </app-news-form>
 
