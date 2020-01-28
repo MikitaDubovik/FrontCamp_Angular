@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ComponentFactoryResolver, ViewChild, ViewContainerRef, ComponentRef } from '@angular/core';
 import { ApiService } from '../services/api/api.service';
 import { Source } from '../models/source';
 import { Article } from '../models/article';
-import { StateService } from '../services/state/state.service';
+import { NewsCardComponent } from './news-card/news-card.component';
+import { NewsCardWrapper } from './news-card/news-card-wrapper';
 
 @Component({
   selector: 'app-main',
@@ -21,19 +22,24 @@ export class MainComponent implements OnInit {
   title: string;
   articlePage: number;
   filterInput: string;
+  index: number;
+  viewContainerRef: ViewContainerRef;
 
   // Const
   myTitle: string;
   defaulTitle: string;
 
-  constructor(private apiService: ApiService, private stateService: StateService) {
+  @ViewChild(NewsCardWrapper, { static: true }) newsCardviewContainerRef: NewsCardWrapper;
+  componentsReferences = [];
+
+  constructor(private apiService: ApiService, private componentFactoryResolver: ComponentFactoryResolver) {
     this.myTitle = 'AMASING NEWS';
     this.defaulTitle = 'Please, choose source';
   }
 
   ngOnInit() {
     this.title = this.defaulTitle;
-
+    this.viewContainerRef = this.newsCardviewContainerRef.viewContainerRef;
     this.apiService.getSources().subscribe(
       resp => {
         this.sources = resp;
@@ -46,7 +52,6 @@ export class MainComponent implements OnInit {
 
     this.setInitialArticles();
   }
-
 
   receiveGlobalFilter($event) {
     this.filterInput = $event;
@@ -70,26 +75,53 @@ export class MainComponent implements OnInit {
           this.isAdded = true;
           this.filterInput = '';
           this.createdByMe = false;
+
+          this.addArticles();
         } else {
           alert('NEWS API IS BROKEN');
         }
       }
     );
 
+
     this.setSourceTitle();
+  }
+
+  deleteArticle(title, index) {
+
+    this.apiService.deleteNodeArticleByTitle(title);
+
+    // removing component from container
+    this.viewContainerRef.remove(index);
+
+    this.componentsReferences = this.componentsReferences.filter(x => x.index !== index);
+  }
+
+  addArticles() {
+    const newsCardFactory = this.componentFactoryResolver.resolveComponentFactory(NewsCardComponent);
+    this.viewContainerRef.clear();
+    for (let i = 0; i < this.articles.length; i++) {
+      const componentRef = this.viewContainerRef.createComponent(newsCardFactory);
+      const currentComponent = componentRef.instance;
+
+      currentComponent.article = this.articles[i];
+      currentComponent.index = this.index++;
+      currentComponent.createdByMe = this.createdByMe;
+      currentComponent.compInteraction = this;
+      // add reference for newly created component
+      this.componentsReferences.push(currentComponent);
+    }
   }
 
   loadMore() {
     this.articlePage++;
 
-    // For future task with own DB
-    // Add check for Load More button
     if (this.createdByMe) {
       this.createdByMeFilter(true);
       this.apiService.getNodeArticles().subscribe(resp => {
         this.articles.push(...resp);
+        this.addArticles();
       });
-      // this.originalArticles = this.nodeService.getWebArticles(this.articlePage);
     } else {
       this.apiService.getWebArticles(this.sourceId, this.articlePage).subscribe(
         resp => {
@@ -108,6 +140,8 @@ export class MainComponent implements OnInit {
           } else {
             this.isAdded = false;
           }
+
+          this.addArticles();
         }
       );
     }
@@ -127,6 +161,7 @@ export class MainComponent implements OnInit {
       this.apiService.getNodeArticles().subscribe(resp => {
         if (resp.length > 0) {
           this.articles = resp;
+          this.addArticles();
         } else {
           this.isAdded = false;
         }

@@ -2,19 +2,16 @@
     <div class="sourceName">
         <h1>{{title}}</h1>
     </div>
-    <app-filter
-     [sources]="sources"
-     (changeSource)="receiveSourceId($event)"
-     (clickFilterButton)="receiveGlobalFilter($event)"
-     (clickCreatedByMeCheckbox)="receiveCreatedByMeFilter($event)"
-    ></app-filter
-    >
+    <app-filter [sources]="sources" (changeSource)="receiveSourceId($event)"
+        (clickFilterButton)="receiveGlobalFilter($event)" (clickCreatedByMeCheckbox)="receiveCreatedByMeFilter($event)">
+    </app-filter>
+
     <div class="source">
+
+        <ng-template app-news-card>
+        </ng-template>
+
         <div *ngIf="articles">
-            <div class="news" *ngFor="let article of articles">
-                <app-news-card [article]="article" [createdByMe]="createdByMe">                
-                </app-news-card>
-            </div>
 
             <div class="loadMore" *ngIf="isAdded; else disabledButton">
                 <button mat-raised-button (click)="loadMore()">Load more</button>

@@ -1,3 +1,15 @@
+$border-style: solid;
+
+.news {
+  border-color: #a3d9d9;
+  border-width: 2px;
+  border-style: $border-style;
+  border-radius: 10px;
+  min-width: 50%;
+  display: inline-block;
+  margin: 40px;
+}
+
 .newsWrapper {
   display: grid;
   grid-template-columns: 250px 550px 130px 100px;

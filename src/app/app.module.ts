@@ -19,6 +19,7 @@ import { EditComponent } from './edit/edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreateComponent } from './create/create.component';
 import { NewsFormComponent } from './news-form/news-form.component';
+import { NewsCardWrapper } from './main/news-card/news-card-wrapper';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { NewsFormComponent } from './news-form/news-form.component';
     NewsCardComponent,
     EditComponent,
     CreateComponent,
-    NewsFormComponent
+    NewsFormComponent,
+    NewsCardWrapper
   ],
   imports: [
     BrowserModule,
@@ -51,6 +53,9 @@ import { NewsFormComponent } from './news-form/news-form.component';
   exports: [
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    AppComponent, NewsCardComponent
+  ]
 })
 export class AppModule { }
