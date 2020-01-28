@@ -16,7 +16,7 @@ export class NewsCardComponent implements OnInit {
   @Input() article: Article;
   @Input() createdByMe: boolean;
 
-  //interface for Parent-Child interaction
+  // interface for Parent-Child interaction
   public compInteraction: DeleteArticle;
 
   constructor() { }

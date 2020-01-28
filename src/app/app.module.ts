@@ -8,7 +8,15 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
 import { MainComponent } from './main/main.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { MatCheckboxModule, MatSelectModule, MatButtonModule, MatInputModule, MatFormFieldModule } from '@angular/material';
+import {
+  MatCheckboxModule,
+  MatSelectModule,
+  MatButtonModule,
+  MatInputModule,
+  MatFormFieldModule,
+  MatRadioModule,
+  MAT_RADIO_DEFAULT_OPTIONS
+} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -19,7 +27,7 @@ import { EditComponent } from './edit/edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreateComponent } from './create/create.component';
 import { NewsFormComponent } from './news-form/news-form.component';
-import { NewsCardWrapper } from './main/news-card/news-card-wrapper';
+import { NewsCardDirective } from './main/news-card/news-card-directive';
 
 @NgModule({
   declarations: [
@@ -35,7 +43,7 @@ import { NewsCardWrapper } from './main/news-card/news-card-wrapper';
     EditComponent,
     CreateComponent,
     NewsFormComponent,
-    NewsCardWrapper
+    NewsCardDirective
   ],
   imports: [
     BrowserModule,
@@ -47,12 +55,16 @@ import { NewsCardWrapper } from './main/news-card/news-card-wrapper';
     MatButtonModule,
     MatInputModule,
     MatFormFieldModule,
+    MatRadioModule,
     FormsModule,
     ReactiveFormsModule
   ],
   exports: [
   ],
-  providers: [],
+  providers: [{
+    provide: MAT_RADIO_DEFAULT_OPTIONS,
+    useValue: { color: 'primary' },
+  }],
   bootstrap: [AppComponent],
   entryComponents: [
     AppComponent, NewsCardComponent

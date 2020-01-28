@@ -1,8 +1,8 @@
 import { Directive, ViewContainerRef } from '@angular/core';
 
 @Directive({
-    selector: '[app-news-card]',
+    selector: '[appNewsCard]',
 })
-export class NewsCardWrapper {
+export class NewsCardDirective {
     constructor(public viewContainerRef: ViewContainerRef) { }
 }

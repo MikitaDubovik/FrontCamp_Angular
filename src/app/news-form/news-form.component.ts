@@ -27,7 +27,8 @@ export class NewsFormComponent implements OnInit {
       image: [this.oldArticle.urlToImage, Validators.required],
       data: [this.oldArticle.publishedAt, Validators.required],
       author: [this.oldArticle.author, Validators.required],
-      url: [this.oldArticle.url, Validators.required]
+      url: [this.oldArticle.url, Validators.required],
+      imageType: 'URL'
     });
   }
 
@@ -42,5 +43,9 @@ export class NewsFormComponent implements OnInit {
     article.url = this.newsForm.value.url;
     article.content = this.newsForm.value.content;
     this.clickSaveButton.emit(article);
+  }
+
+  imageInputChange(fileInputEvent: any) {
+    console.log(fileInputEvent.target.files[0]);
   }
 }
