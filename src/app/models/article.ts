@@ -7,4 +7,5 @@ export class Article {
     author: string;
     url: string;
     content: string;
+    source: any;
 }

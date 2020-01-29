@@ -1,9 +1,6 @@
 <div class="main">
-    <div class="sourceName" *ngIf="!createdByMe else myTitle">
-        <h1>{{article.source.name}}</h1>
-    </div>
-    <div #myTitle class="sourceName" *ngIf="createdByMe else myTitle">
-        <h1>AMASING NEWS!</h1>
+    <div class="sourceName">
+        <h1>{{title}}</h1>
     </div>
     <div class="source">
         <div class="news">

@@ -14,6 +14,7 @@ export class DetailsComponent implements OnInit {
 
   article: Article;
   createdByMe: boolean;
+  title: string;
 
   constructor(private route: ActivatedRoute, private apiService: ApiService) { }
 
@@ -23,12 +24,13 @@ export class DetailsComponent implements OnInit {
         this.createdByMe = params.get('createdByMe') === 'true';
         const title = params.get('title');
         if (this.createdByMe) {
+          this.title = 'AMASING NEWS';
           return this.apiService.getNodeArticleByTitle(title);
         }
 
         return this.apiService.getWebArticleByTitle(title);
       })
-    ).subscribe(resp => this.article = resp);
+    ).subscribe(resp => { this.article = resp; this.title = resp.source.name; });
   }
 
   delete(title: string) {
