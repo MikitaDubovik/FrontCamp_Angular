@@ -35,6 +35,7 @@ export class MainComponent implements OnInit {
   constructor(private apiService: ApiService, private componentFactoryResolver: ComponentFactoryResolver) {
     this.myTitle = 'AMASING NEWS';
     this.defaulTitle = 'Please, choose source';
+    this.index = 0;
   }
 
   ngOnInit() {

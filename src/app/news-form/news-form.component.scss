@@ -20,14 +20,14 @@ form {
 }
 
 form > .leftPart,
-form > .rightPart {
+form > .centerPart {
   text-align: left;
   margin-left: 60px;
 }
 
 .leftPart > mat-form-field,
-.rightPart > mat-form-field,
-.rightPart > .buttons {
+.centerPart > mat-form-field,
+.centerPart > .buttons {
   display: block;
   max-width: 15em;
 }
@@ -55,6 +55,11 @@ img {
   max-height: 100px;
 }
 
-mat-radio-button{
+mat-radio-button {
   margin-left: 10px;
+}
+
+.selectButton {
+  display: block !important;
+  margin-top: 10px;
 }

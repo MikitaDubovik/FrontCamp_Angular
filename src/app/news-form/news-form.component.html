@@ -17,7 +17,7 @@
                 </label>
             </mat-form-field>
         </div>
-        <div class="rightPart">
+        <div class="centerPart">
 
             <label>Image
                 <mat-radio-group formControlName="imageType">
@@ -32,7 +32,7 @@
                 <ng-template #file>
                     <input #imageInput hidden="true" type="file" onclick="this.value=null"
                         (change)="imageInputChange($event)" accept=".png" formControlName="image" />
-                    <button mat-flat-button color="primary" (click)="imageInput.click()">Select image</button>
+                    <button mat-flat-button color="primary" (click)="imageInput.click()" class="selectButton">Select image</button>
                 </ng-template>
             </label>
 

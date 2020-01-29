@@ -14,12 +14,20 @@ export class NewsFormComponent implements OnInit {
   @Output() clickSaveButton = new EventEmitter<Article>();
 
   newsForm: FormGroup;
+  imageValue: any;
 
   constructor(private fb: FormBuilder) {
 
   }
 
   ngOnInit() {
+    let imageTypeName: string;
+    if (!this.oldArticle.urlToImage || this.oldArticle.urlToImage.includes('http')) {
+      imageTypeName = 'URL';
+    } else {
+      imageTypeName = 'File';
+    }
+
     this.newsForm = this.fb.group({
       title: [this.oldArticle.title, Validators.required],
       description: [this.oldArticle.description, Validators.required],
@@ -28,13 +36,13 @@ export class NewsFormComponent implements OnInit {
       data: [this.oldArticle.publishedAt, Validators.required],
       author: [this.oldArticle.author, Validators.required],
       url: [this.oldArticle.url, Validators.required],
-      imageType: 'URL'
+      imageType: imageTypeName
     });
   }
 
   onSubmit() {
     const article = new Article();
-    article.urlToImage = this.newsForm.value.image;
+    article.urlToImage = this.imageValue;
     article.title = this.newsForm.value.title;
     article.description = this.newsForm.value.description;
     article.publishedAt = this.newsForm.value.data;
@@ -46,6 +54,13 @@ export class NewsFormComponent implements OnInit {
   }
 
   imageInputChange(fileInputEvent: any) {
-    console.log(fileInputEvent.target.files[0]);
+    const file = fileInputEvent.target.files[0];
+
+    const fileReader = new FileReader();
+    fileReader.onload = (e) => {
+      this.newsForm.value.image = fileReader.result;
+      this.imageValue = fileReader.result;
+    };
+    fileReader.readAsDataURL(file);
   }
 }
