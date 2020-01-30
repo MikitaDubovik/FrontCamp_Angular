@@ -33,7 +33,7 @@ export class MainComponent implements OnInit {
   componentsReferences = [];
 
   constructor(private apiService: ApiService, private componentFactoryResolver: ComponentFactoryResolver) {
-    this.myTitle = 'AMASING NEWS';
+    this.myTitle = 'AMASING NEWS!';
     this.defaulTitle = 'Please, choose source';
     this.index = 0;
   }

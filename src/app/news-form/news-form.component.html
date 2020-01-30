@@ -32,7 +32,8 @@
                 <ng-template #file>
                     <input #imageInput hidden="true" type="file" onclick="this.value=null"
                         (change)="imageInputChange($event)" accept=".png" formControlName="image" />
-                    <button mat-flat-button color="primary" (click)="imageInput.click()" class="selectButton">Select image</button>
+                    <button mat-flat-button type="button" color="primary" (click)="imageInput.click()"
+                        class="selectButton">Select image</button>
                 </ng-template>
             </label>
 
@@ -53,7 +54,7 @@
             </mat-form-field>
             <div class="buttons">
                 <button mat-raised-button color="green" type="submit" [disabled]="newsForm.invalid">Save</button>
-                <button mat-raised-button routerLink="/" class="cancel">Cancel</button>
+                <button mat-raised-button type="button" routerLink="/" class="cancel">Cancel</button>
             </div>
         </div>
         <div class="imagePart">

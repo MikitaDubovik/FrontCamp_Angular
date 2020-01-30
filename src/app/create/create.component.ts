@@ -10,6 +10,7 @@ import { ApiService } from '../services/api/api.service';
 export class CreateComponent implements OnInit {
 
   oldArticle: Article;
+  title: string = 'Create';
 
   constructor(private apiService: ApiService) {
     this.oldArticle = new Article();

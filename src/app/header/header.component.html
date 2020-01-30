@@ -1,9 +1,14 @@
-<div class="header">
-    <div class="logo">
-        <img src="https://sun9-65.userapi.com/c855232/v855232458/18ea9f/KUkZDxzZNmc.jpg">
-        <p>On my way</p>
+<mat-toolbar class="header">
+    <a routerLink='/' class="mat-button" aria-disabled="false">
+        <span class="mat-button-wrapper">
+            <img src="https://icons.iconarchive.com/icons/icons8/ios7/128/Very-Basic-Speech-Bubble-icon.png">
+            <span class="mat-display-1">Amasing news!</span>
+        </span>
+
+    </a>
+    <div class="spacer">
     </div>
-    <div class="user">
-        <p>User Placeholder</p>
-    </div>
-</div>
+    <span class="user">
+        <button mat-flat-button color="warn" routerLink="/signin">Sign In</button>
+    </span>
+</mat-toolbar>

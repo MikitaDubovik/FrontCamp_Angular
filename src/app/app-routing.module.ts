@@ -7,6 +7,9 @@ import { DetailsComponent } from './details/details.component';
 import { EditComponent } from './edit/edit.component';
 import { CreateComponent } from './create/create.component';
 
+import { SignInComponent } from './sign-in/sign-in.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+
 
 const routes: Routes = [
   { path: '', component: MainComponent },
@@ -15,6 +18,8 @@ const routes: Routes = [
   { path: 'details/:title/:createdByMe', component: DetailsComponent },
   { path: 'edit/:title', component: EditComponent },
   { path: 'create', component: CreateComponent },
+  { path: 'signup', component: SignUpComponent },
+  { path: 'signin', component: SignInComponent },
   { path: '**', redirectTo: '/404' }
 ];
 

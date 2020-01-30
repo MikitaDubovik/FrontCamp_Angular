@@ -1,7 +1,6 @@
 <div class="edit">
-    <div class="command">
-        <h1>Edit</h1>
-    </div>
+    <app-title [title]="title">
+    </app-title>
 
     <app-news-form [oldArticle]="oldArticle" (clickSaveButton)="updateNews($event)" *ngIf="oldArticle">
 

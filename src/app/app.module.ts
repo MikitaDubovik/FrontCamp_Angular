@@ -15,7 +15,9 @@ import {
   MatInputModule,
   MatFormFieldModule,
   MatRadioModule,
-  MAT_RADIO_DEFAULT_OPTIONS
+  MAT_RADIO_DEFAULT_OPTIONS,
+  MatCardModule,
+  MatToolbarModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
@@ -28,6 +30,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CreateComponent } from './create/create.component';
 import { NewsFormComponent } from './news-form/news-form.component';
 import { NewsCardDirective } from './main/news-card/news-card-directive';
+import { SignInComponent } from './sign-in/sign-in.component';
+import { TitleComponent } from './shared/title/title.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +48,10 @@ import { NewsCardDirective } from './main/news-card/news-card-directive';
     EditComponent,
     CreateComponent,
     NewsFormComponent,
-    NewsCardDirective
+    NewsCardDirective,
+    SignInComponent,
+    TitleComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +64,8 @@ import { NewsCardDirective } from './main/news-card/news-card-directive';
     MatInputModule,
     MatFormFieldModule,
     MatRadioModule,
+    MatCardModule,
+    MatToolbarModule,
     FormsModule,
     ReactiveFormsModule
   ],

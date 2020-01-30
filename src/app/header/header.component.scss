@@ -1,22 +1,10 @@
 .header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background-color: #A3D9D9;
-  z-index: 1;
-  height: 55px;
+  flex-wrap: wrap;
+  background-color: #a3d9d9;
 }
 
 img {
-  width: 3%;
-  height: 4%;
-  margin-left: 2%;
-  padding-right: 1%;
-  vertical-align: middle;
-}
-
-.logo {
-  position: inherit;
+  height: 50px;
 }
 
 p {
@@ -24,6 +12,9 @@ p {
 }
 
 .user {
-  float: right;
-  margin-right: 2%;
+  display: flex;
+}
+
+.spacer {
+  flex-grow: 1;
 }

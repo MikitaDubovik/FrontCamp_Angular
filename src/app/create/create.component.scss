@@ -1,18 +1,6 @@
-$border-color: #60a3bc;
-$text-color: black;
-$border-style: solid;
-
 .create {
   position: absolute;
   padding-top: 33px;
   min-width: 100%;
   text-align: center;
-}
-
-.command {
-  border-width: 2px;
-  border-top: 0px;
-  border-style: $border-style;
-  background-color: #f1cfd7;
-  border-color: #f1d8de;
 }

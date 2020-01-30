@@ -1,0 +1,44 @@
+<div class="signup">
+    <app-title [title]="title">
+    </app-title>
+    <div class="signup_form">
+
+        <mat-card>
+            <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+                <mat-card-content>
+                    <mat-form-field>
+                        <label>First name
+                            <input matInput formControlName="firstName" />
+                        </label>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <label>Second name
+                            <input matInput formControlName="secondName" />
+                        </label>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <label>Username
+                            <input matInput formControlName="username" />
+                        </label>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <label>Password
+                            <input matInput formControlName="password" />
+                        </label>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <label>Confirm password
+                            <input matInput formControlName="confirmPassword" />
+                        </label>
+                    </mat-form-field>
+
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-raised-button color="green" type="submit"
+                        [disabled]="signupForm.invalid || signupForm.value.password !== signupForm.value.confirmPassword">Save</button>
+                    <button mat-raised-button type="button" routerLink="../signin">Cancel</button>
+                </mat-card-actions>
+            </form>
+        </mat-card>
+    </div>
+</div>
