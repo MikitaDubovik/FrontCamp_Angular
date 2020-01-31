@@ -12,7 +12,7 @@ import { Article } from '../models/article';
 export class EditComponent implements OnInit {
 
   oldArticle: Article;
-  title: string = 'Edit';
+  title = 'Edit';
 
   constructor(private apiService: ApiService, private route: ActivatedRoute) { }
 

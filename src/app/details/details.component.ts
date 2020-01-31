@@ -16,7 +16,11 @@ export class DetailsComponent implements OnInit {
   createdByMe: boolean;
   title: string;
 
-  constructor(private route: ActivatedRoute, private apiService: ApiService) { }
+  constructor(private route: ActivatedRoute, private apiService: ApiService) {
+    this.title = '';
+    this.article = new Article();
+    this.article.title = '';
+  }
 
   ngOnInit() {
     this.route.paramMap.pipe(

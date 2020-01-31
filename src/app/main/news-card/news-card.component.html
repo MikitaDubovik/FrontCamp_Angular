@@ -1,18 +1,23 @@
-<div class="news">
-    <div class="newsWrapper">
-        <img [src]="article.urlToImage">
-        <div class="text">
-            <p>{{article.title}}</p>
-            <p>{{article.description | slice : 0:90}}...</p>
-            <p>{{article.content| slice : 0:120}}...</p>
-            <a [routerLink]="['/details', article.title, createdByMe]">Read more</a>
-        </div>
-        <div class="date">
-            <p>{{article.publishedAt | date:'shortTime' }}</p>
-        </div>
-        <div class="control" *ngIf="createdByMe">
+<mat-card class="news">
+    <mat-card-header>
+        <mat-card-title>
+            {{article.title}}
+        </mat-card-title>
+        <mat-card-subtitle>
+            {{article.publishedAt | date:'shortTime' }}
+        </mat-card-subtitle>
+    </mat-card-header>
+    <img [src]="article.urlToImage">
+    <mat-card-content>
+        <p>{{article.description | slice : 0:90}}...</p>
+        <p>{{article.content| slice : 0:120}}...</p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button color="primary" [routerLink]="['/details', article.title, createdByMe]">Read
+            more</button>
+        <ng-container *ngIf="createdByMe">
             <button mat-raised-button color="primary" [routerLink]="['/edit', article.title]">Edit</button>
             <button mat-raised-button color="primary" (click)="deleteArticle()">Delete</button>
-        </div>
-    </div>
-</div>
+        </ng-container>
+    </mat-card-actions>
+</mat-card>

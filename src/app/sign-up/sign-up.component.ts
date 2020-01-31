@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class SignUpComponent implements OnInit {
 
-  title: string = "Sign Up";
+  title = 'Sign Up';
   signupForm: FormGroup;
   constructor(private fb: FormBuilder) { }
 

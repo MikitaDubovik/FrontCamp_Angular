@@ -1,65 +1,27 @@
-$border-color: #60a3bc;
-$text-color: black;
-$border-style: solid;
-
 .form {
-  border-color: #a3d9d9;
-  border-width: 2px;
-  border-style: $border-style;
-  border-radius: 10px;
-  min-width: 40%;
-  max-width: 90%;
-  display: inline-block;
-  margin: 40px;
+  width: 60%;
+  margin: auto;
+  margin-top: 20px;
+  padding-bottom: 80px;
 }
 
 form {
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: 300px 350px 200px;
+  flex-direction: column;
 }
 
-form > .leftPart,
-form > .centerPart {
-  text-align: left;
-  margin-left: 60px;
-}
-
-.leftPart > mat-form-field,
-.centerPart > mat-form-field,
-.centerPart > .buttons {
-  display: block;
-  max-width: 15em;
-}
-
-.cancel {
-  margin-left: 50px;
-}
-
-input,
-textarea {
-  border-style: $border-style;
-  border-bottom: none;
-  border-color: #a3d9d9;
-  border-top: none;
-  border-radius: 3px;
-}
-
-.buttons {
-  padding-bottom: 20px;
+mat-card-content.mat-card-content {
+  display: flex;
+  flex-direction: column;
 }
 
 img {
   margin-top: 20px;
-  max-width: 160px;
-  max-height: 100px;
+  max-width: 260px;
+  max-height: 200px;
 }
 
-mat-radio-button {
-  margin-left: 10px;
-}
-
-.selectButton {
-  display: block !important;
+.selectButton,
+.urlInput {
+  display: block;
   margin-top: 10px;
 }

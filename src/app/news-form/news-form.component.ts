@@ -36,13 +36,13 @@ export class NewsFormComponent implements OnInit {
       data: [this.oldArticle.publishedAt, Validators.required],
       author: [this.oldArticle.author, Validators.required],
       url: [this.oldArticle.url, Validators.required],
-      imageType: imageTypeName
+      imageType: [imageTypeName]
     });
   }
 
   onSubmit() {
     const article = new Article();
-    article.urlToImage = this.imageValue;
+    article.urlToImage = this.newsForm.value.imageType === 'URL' ? this.newsForm.value.image : this.imageValue;
     article.title = this.newsForm.value.title;
     article.description = this.newsForm.value.description;
     article.publishedAt = this.newsForm.value.data;
