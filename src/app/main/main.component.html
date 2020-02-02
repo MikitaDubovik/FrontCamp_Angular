@@ -10,7 +10,7 @@
         <ng-template appNewsCard>
         </ng-template>
 
-        <div *ngIf="articles">
+        <div *ngIf="!initialLoad">
 
             <div class="loadMore" *ngIf="isAdded; else disabledButton">
                 <button mat-raised-button (click)="loadMore()">Load more</button>

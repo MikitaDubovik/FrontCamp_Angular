@@ -20,7 +20,7 @@ import {
   MatToolbarModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { DetailsComponent } from './details/details.component';
 import { FilterComponent } from './main/filter/filter.component';
@@ -33,6 +33,8 @@ import { NewsCardDirective } from './main/news-card/news-card-directive';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { TitleComponent } from './shared/title/title.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { BasicAuthInterceptor } from './helpers/basic-auth-interceptor';
+import { ErrorInterceptor } from './helpers/error-interceptor';
 
 @NgModule({
   declarations: [
@@ -74,7 +76,10 @@ import { SignUpComponent } from './sign-up/sign-up.component';
   providers: [{
     provide: MAT_RADIO_DEFAULT_OPTIONS,
     useValue: { color: 'primary' },
-  }],
+
+  },
+  { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
+  { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },],
   bootstrap: [AppComponent],
   entryComponents: [
     AppComponent, NewsCardComponent

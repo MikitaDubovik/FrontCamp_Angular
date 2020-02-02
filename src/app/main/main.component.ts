@@ -18,13 +18,12 @@ export class MainComponent implements OnInit {
   createdByMe: boolean;
   sources: Source[];
   sourceId: string;
-  articles: Article[];
-  originalArticles: Article[];
   title: string;
   articlePage: number;
   filterInput: string;
   index: number;
   viewContainerRef: ViewContainerRef;
+  initialLoad: boolean;
 
   // Const
   myTitle: string;
@@ -37,6 +36,7 @@ export class MainComponent implements OnInit {
     this.myTitle = 'AMASING NEWS!';
     this.defaulTitle = 'Please, choose source';
     this.index = 0;
+    this.initialLoad = true;
   }
 
   ngOnInit() {
@@ -71,15 +71,14 @@ export class MainComponent implements OnInit {
     this.newsapiService.getArticles(this.sourceId, 1).subscribe(
       resp => {
         if (resp.length > 0) {
-          this.originalArticles = resp;
-          this.articles = this.originalArticles;
           this.articlePage = 1;
           this.isAdded = true;
           this.filterInput = '';
           this.createdByMe = false;
+          this.initialLoad = false;
           this.viewContainerRef.clear();
 
-          this.addArticles(this.articles);
+          this.addArticles(resp);
         } else {
           alert('NEWS API IS BROKEN');
         }
@@ -110,9 +109,9 @@ export class MainComponent implements OnInit {
 
   globalFilter() {
     if (this.filterInput) {
-      this.articles = this.articles.filter(art => art.title.includes(this.filterInput));
-    } else {
-      this.articles = this.originalArticles;
+      this.componentsReferences.filter(data => !data.article.title.toLowerCase().includes(this.filterInput)).forEach(element => {
+        this.viewContainerRef.remove(element.index);
+      });
     }
   }
 
@@ -122,22 +121,19 @@ export class MainComponent implements OnInit {
     this.newsapiService.getArticles(this.sourceId, this.articlePage).subscribe(
       resp => {
         if (resp.length > 0) {
-          this.originalArticles.push(...resp); // added for all cases
 
           if (this.filterInput) {
-            if (resp.find(r => r.title.includes(this.filterInput))) {
-              this.articles.push(...resp.filter(art => art.title.includes(this.filterInput)));
+            if (resp.find(r => r.title.toLowerCase().includes(this.filterInput))) {
+              this.addArticles(resp.filter(art => art.title.includes(this.filterInput)));
             } else {
               this.isAdded = false;
             }
-          } else { // if no filterInput
-            this.articles = this.originalArticles;
+          } else { // if no filterInput            
+            this.addArticles(resp);
           }
         } else {
           this.isAdded = false;
         }
-
-        this.addArticles(resp);
       }
     );
   }
@@ -148,8 +144,7 @@ export class MainComponent implements OnInit {
       this.viewContainerRef.clear();
       this.nodeService.getArticles().subscribe(resp => {
         if (resp.length > 0) {
-          this.articles = resp;
-          this.addArticles(this.articles);
+          this.addArticles(resp);
         }
 
         this.isAdded = false;

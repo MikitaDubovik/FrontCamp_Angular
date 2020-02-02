@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Source } from 'src/app/models/source';
+import { User } from 'src/app/models/user';
+import { AuthenticationService } from 'src/app/services/auth/authentication-service';
 
 @Component({
   selector: 'app-filter',
@@ -14,8 +16,12 @@ export class FilterComponent implements OnInit {
   @Output() clickCreatedByMeCheckbox = new EventEmitter<boolean>();
 
   filterInput: string;
+  currentUser: User;
 
-  constructor() { }
+  constructor(private authenticationService: AuthenticationService) {
+    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+  }
+
 
   ngOnInit() {
   }
