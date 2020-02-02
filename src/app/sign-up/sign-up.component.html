@@ -2,18 +2,12 @@
     <app-title [title]="title">
     </app-title>
     <div class="signup_form">
-
         <mat-card>
             <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
                 <mat-card-content>
                     <mat-form-field>
-                        <label>First name
-                            <input matInput formControlName="firstName" />
-                        </label>
-                    </mat-form-field>
-                    <mat-form-field>
-                        <label>Second name
-                            <input matInput formControlName="secondName" />
+                        <label>Email
+                            <input matInput formControlName="email" />
                         </label>
                     </mat-form-field>
                     <mat-form-field>

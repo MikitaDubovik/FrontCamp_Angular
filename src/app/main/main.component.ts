@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, ComponentFactoryResolver, ViewChild, ViewContainerRef, ComponentRef } from '@angular/core';
-import { ApiService } from '../services/api/api.service';
+import { Component, OnInit, Input, ComponentFactoryResolver, ViewChild, ViewContainerRef } from '@angular/core';
 import { Source } from '../models/source';
 import { Article } from '../models/article';
 import { NewsCardComponent } from './news-card/news-card.component';
 import { NewsCardDirective } from './news-card/news-card-directive';
+import { NewsapiService } from '../services/api/newsapi-service';
+import { NodeService } from '../services/api/node-service';
 
 @Component({
   selector: 'app-main',
@@ -32,7 +33,7 @@ export class MainComponent implements OnInit {
   @ViewChild(NewsCardDirective, { static: true }) newsCardviewContainerRef: NewsCardDirective;
   componentsReferences = [];
 
-  constructor(private apiService: ApiService, private componentFactoryResolver: ComponentFactoryResolver) {
+  constructor(private newsapiService: NewsapiService, private nodeService: NodeService, private componentFactoryResolver: ComponentFactoryResolver) {
     this.myTitle = 'AMASING NEWS!';
     this.defaulTitle = 'Please, choose source';
     this.index = 0;
@@ -41,7 +42,7 @@ export class MainComponent implements OnInit {
   ngOnInit() {
     this.title = this.defaulTitle;
     this.viewContainerRef = this.newsCardviewContainerRef.viewContainerRef;
-    this.apiService.getSources().subscribe(
+    this.newsapiService.getSources().subscribe(
       resp => {
         this.sources = resp;
       }
@@ -67,7 +68,7 @@ export class MainComponent implements OnInit {
   }
 
   setInitialArticles() {
-    this.apiService.getWebArticles(this.sourceId, 1).subscribe(
+    this.newsapiService.getArticles(this.sourceId, 1).subscribe(
       resp => {
         if (resp.length > 0) {
           this.originalArticles = resp;
@@ -91,7 +92,7 @@ export class MainComponent implements OnInit {
 
   deleteArticle(title, index) {
 
-    this.apiService.deleteNodeArticleByTitle(title);
+    this.nodeService.deleteArticleByTitle(title);
 
     // removing component from container
     this.viewContainerRef.remove(index);
@@ -118,7 +119,7 @@ export class MainComponent implements OnInit {
   getWebArticles() {
     this.articlePage++;
 
-    this.apiService.getWebArticles(this.sourceId, this.articlePage).subscribe(
+    this.newsapiService.getArticles(this.sourceId, this.articlePage).subscribe(
       resp => {
         if (resp.length > 0) {
           this.originalArticles.push(...resp); // added for all cases
@@ -145,7 +146,7 @@ export class MainComponent implements OnInit {
     if (selectedOption) {
       this.title = this.myTitle;
       this.viewContainerRef.clear();
-      this.apiService.getNodeArticles().subscribe(resp => {
+      this.nodeService.getArticles().subscribe(resp => {
         if (resp.length > 0) {
           this.articles = resp;
           this.addArticles(this.articles);

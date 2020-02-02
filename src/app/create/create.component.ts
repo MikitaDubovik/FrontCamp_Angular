@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Article } from '../models/article';
-import { ApiService } from '../services/api/api.service';
+import { NodeService } from '../services/api/node-service';
 
 @Component({
   selector: 'app-create',
@@ -12,7 +12,7 @@ export class CreateComponent implements OnInit {
   oldArticle: Article;
   title = 'Create';
 
-  constructor(private apiService: ApiService) {
+  constructor(private nodeService: NodeService) {
     this.oldArticle = new Article();
     this.oldArticle.publishedAt = new Date();
   }
@@ -21,6 +21,6 @@ export class CreateComponent implements OnInit {
   }
 
   createNews($event) {
-    this.apiService.createNodeArticles($event);
+    this.nodeService.createArticles($event);
   }
 }

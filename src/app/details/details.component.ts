@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Article } from '../models/article';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
-import { ApiService } from '../services/api/api.service';
+import { NodeService } from '../services/api/node-service';
+import { NewsapiService } from '../services/api/newsapi-service';
 
 @Component({
   selector: 'app-main',
@@ -16,7 +17,7 @@ export class DetailsComponent implements OnInit {
   createdByMe: boolean;
   title: string;
 
-  constructor(private route: ActivatedRoute, private apiService: ApiService) {
+  constructor(private route: ActivatedRoute, private nodeService: NodeService, private newsapiService: NewsapiService) {
     this.title = '';
     this.article = new Article();
     this.article.title = '';
@@ -29,15 +30,15 @@ export class DetailsComponent implements OnInit {
         const title = params.get('title');
         if (this.createdByMe) {
           this.title = 'AMASING NEWS';
-          return this.apiService.getNodeArticleByTitle(title);
+          return this.nodeService.getArticleByTitle(title);
         }
 
-        return this.apiService.getWebArticleByTitle(title);
+        return this.newsapiService.getArticleByTitle(title);
       })
     ).subscribe(resp => { this.article = resp; this.title = resp.source.name; });
   }
 
   delete(title: string) {
-    this.apiService.deleteNodeArticleByTitle(title);
+    this.nodeService.deleteArticleByTitle(title);
   }
 }
