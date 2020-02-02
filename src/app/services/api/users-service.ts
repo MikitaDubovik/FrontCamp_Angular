@@ -4,7 +4,7 @@ import { User } from 'src/app/models/user';
 
 import { catchError } from 'rxjs/operators';
 
-const baseUrl = 'http://localhost:3000/User';
+const baseUrl = 'http://localhost:3000/users';
 
 @Injectable({
     providedIn: 'root'
