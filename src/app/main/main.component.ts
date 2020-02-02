@@ -141,6 +141,7 @@ export class MainComponent implements OnInit {
   createdByMeFilter(selectedOption) {
     if (selectedOption) {
       this.title = this.myTitle;
+      this.initialLoad = false;
       this.viewContainerRef.clear();
       this.nodeService.getArticles().subscribe(resp => {
         if (resp.length > 0) {
