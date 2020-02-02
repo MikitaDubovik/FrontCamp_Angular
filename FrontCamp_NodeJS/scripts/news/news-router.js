@@ -3,7 +3,6 @@ let router = express.Router()
 
 const pug = require('pug');
 const baseCompiledFunction = pug.compileFile('./scripts/pug/base-presentation.pug');
-const dataCompiledFunction = pug.compileFile('./scripts/pug/data.pug');
 const errorCompiledFunction = pug.compileFile('./scripts/pug/error.pug');
 
 const auth = require('../authentication/auth');
@@ -23,7 +22,7 @@ router.use((req, res, next) => {
     next();
 })
 
-router.get('/', (req, res, next) => {
+router.get('/', auth.required, (req, res, next) => {
     News.find(function (err, result) {
         if (err) {
             return next(err);
@@ -43,7 +42,7 @@ router.get('/:id', (req, res, next) => {
     });
 });
 
-router.get('/title/:title', (req, res, next) => {
+router.get('/title/:title', auth.required, (req, res, next) => {
     News.findOne({ title: req.params.title }, function (err, result) {
         if (err) {
             return next(err);
@@ -53,7 +52,7 @@ router.get('/title/:title', (req, res, next) => {
     });
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', auth.required, (req, res, next) => {
     let news = new News(req.body);
     news.publishedAt = Date.now();
     news.save(function (err) {
@@ -80,7 +79,7 @@ router.put('/:id', auth.required, (req, res, next) => {
     });
 });
 
-router.put('/title/:title', (req, res, next) => {
+router.put('/title/:title', auth.required, (req, res, next) => {
     News.findOneAndUpdate({ title: req.params.title }, { $set: req.body }, function (err, result) {
         if (err) {
             return next(err);
@@ -109,7 +108,7 @@ router.delete('/:id', auth.required, (req, res, next) => {
     });
 });
 
-router.delete('/title/:title', (req, res, next) => {
+router.delete('/title/:title', auth.required, (req, res, next) => {
     News.findOneAndDelete({ title: req.params.title }, function (err, result) {
         if (err) {
             return next(err);
