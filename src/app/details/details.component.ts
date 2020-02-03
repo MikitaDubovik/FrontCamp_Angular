@@ -16,6 +16,7 @@ export class DetailsComponent implements OnInit {
   article: Article;
   createdByMe: boolean;
   title: string;
+  defaultTitle = 'AMASING NEWS';
 
   constructor(private route: ActivatedRoute, private nodeService: NodeService, private newsapiService: NewsapiService) {
     this.title = '';
@@ -29,13 +30,13 @@ export class DetailsComponent implements OnInit {
         this.createdByMe = params.get('createdByMe') === 'true';
         const title = params.get('title');
         if (this.createdByMe) {
-          this.title = 'AMASING NEWS';
+          this.title = this.defaultTitle;
           return this.nodeService.getArticleByTitle(title);
         }
 
         return this.newsapiService.getArticleByTitle(title);
       })
-    ).subscribe(resp => { this.article = resp; this.title = resp.source.name; });
+    ).subscribe(resp => { this.article = resp; this.title = resp.source ? resp.source.name : this.defaultTitle; });
   }
 
   delete(title: string) {

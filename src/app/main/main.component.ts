@@ -32,7 +32,10 @@ export class MainComponent implements OnInit {
   @ViewChild(NewsCardDirective, { static: true }) newsCardviewContainerRef: NewsCardDirective;
   componentsReferences = [];
 
-  constructor(private newsapiService: NewsapiService, private nodeService: NodeService, private componentFactoryResolver: ComponentFactoryResolver) {
+  constructor(
+    private newsapiService: NewsapiService,
+    private nodeService: NodeService,
+    private componentFactoryResolver: ComponentFactoryResolver) {
     this.myTitle = 'AMASING NEWS!';
     this.defaulTitle = 'Please, choose source';
     this.index = 0;
@@ -128,7 +131,7 @@ export class MainComponent implements OnInit {
             } else {
               this.isAdded = false;
             }
-          } else { // if no filterInput            
+          } else {  // if no filterInput
             this.addArticles(resp);
           }
         } else {

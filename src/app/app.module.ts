@@ -3,73 +3,52 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { FooterComponent } from './footer/footer.component';
-import { MainComponent } from './main/main.component';
-import { NotFoundComponent } from './not-found/not-found.component';
 import {
-  MatCheckboxModule,
-  MatSelectModule,
   MatButtonModule,
-  MatInputModule,
-  MatFormFieldModule,
-  MatRadioModule,
   MAT_RADIO_DEFAULT_OPTIONS,
   MatCardModule,
-  MatToolbarModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
 import { DetailsComponent } from './details/details.component';
-import { FilterComponent } from './main/filter/filter.component';
-import { NewsCardComponent } from './main/news-card/news-card.component';
 import { EditComponent } from './edit/edit.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { CreateComponent } from './create/create.component';
-import { NewsFormComponent } from './news-form/news-form.component';
-import { NewsCardDirective } from './main/news-card/news-card-directive';
-import { SignInComponent } from './sign-in/sign-in.component';
-import { TitleComponent } from './shared/title/title.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
 import { BasicAuthInterceptor } from './helpers/basic-auth-interceptor';
 import { ErrorInterceptor } from './helpers/error-interceptor';
+import { NotFoundModule } from './not-found/not-found.module';
+import { MainModule } from './main/main.module';
+import { SharedModule } from './shared/shared.module';
+import { FooterModule } from './footer/footer.module';
+import { HeaderModule } from './header/header.module';
+import { NewsFormModule } from './news-form/news-form.module';
+import { SignInModule } from './sign-in/sign-in.module';
+import { SignUpModule } from './sign-up/sign-up.module';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     SidebarComponent,
-    FooterComponent,
-    MainComponent,
-    NotFoundComponent,
     DetailsComponent,
-    FilterComponent,
-    NewsCardComponent,
     EditComponent,
-    CreateComponent,
-    NewsFormComponent,
-    NewsCardDirective,
-    SignInComponent,
-    TitleComponent,
-    SignUpComponent
+    CreateComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MatCheckboxModule,
-    MatSelectModule,
     BrowserAnimationsModule,
-    HttpClientModule,
     MatButtonModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatRadioModule,
     MatCardModule,
-    MatToolbarModule,
-    FormsModule,
-    ReactiveFormsModule
+    HttpClientModule,
+    NotFoundModule,
+    MainModule,
+    SharedModule,
+    FooterModule,
+    HeaderModule,
+    NewsFormModule,
+    SignInModule,
+    SignUpModule
   ],
   exports: [
   ],
@@ -79,10 +58,11 @@ import { ErrorInterceptor } from './helpers/error-interceptor';
 
   },
   { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
-  { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },],
+  { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent],
   entryComponents: [
-    AppComponent, NewsCardComponent
+    AppComponent
   ]
 })
 export class AppModule { }

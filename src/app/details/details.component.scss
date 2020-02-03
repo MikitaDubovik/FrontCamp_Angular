@@ -1,18 +1,14 @@
+.details {
+  padding-top: 40px;
+}
+
 .main {
-  width: 80%;
+  width: 50%;
   margin: auto;
   margin-top: 20px;
 }
 
 img {
   width: calc(100% - 10px);
-}
-
-button {
-  margin-left: 8px !important;
-  margin-right: 8px !important;
-}
-
-.details {
-  padding-top: 40px;
+  max-height: 500px;
 }
