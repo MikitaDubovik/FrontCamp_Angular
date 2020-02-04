@@ -3,8 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Article } from 'src/app/models/article';
 
 import { catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
-const baseUrl = 'http://localhost:3000/News';
+const baseUrl = environment.nodeNewsUrl;
 
 @Injectable({
     providedIn: 'root'

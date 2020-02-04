@@ -6,9 +6,10 @@ import { Article } from 'src/app/models/article';
 
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
-const apiKey = '&apiKey=980e9d4359984b1bb923d5e1043ce9e2';
-const baseUrl = 'https://newsapi.org/';
+const apiKey = environment.newsapiApiKey;
+const baseUrl = environment.newsapiUrl;
 
 @Injectable({
     providedIn: 'root'

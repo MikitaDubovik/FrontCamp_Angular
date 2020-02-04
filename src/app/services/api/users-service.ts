@@ -3,8 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { User } from 'src/app/models/user';
 
 import { catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
-const baseUrl = 'http://localhost:3000/users';
+const baseUrl = environment.usersUrl;
 
 @Injectable({
     providedIn: 'root'
