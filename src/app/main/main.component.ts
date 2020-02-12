@@ -88,7 +88,6 @@ export class MainComponent implements OnInit {
       }
     );
 
-
     this.setSourceTitle();
   }
 
@@ -112,7 +111,7 @@ export class MainComponent implements OnInit {
 
   globalFilter() {
     if (this.filterInput) {
-      this.componentsReferences.filter(data => !data.article.title.toLowerCase().includes(this.filterInput)).forEach(element => {
+      this.componentsReferences.filter(data => !data.article.title.toLowerCase().includes(this.filterInput.toLowerCase())).forEach(element => {
         this.viewContainerRef.remove(element.index);
       });
     }
@@ -126,8 +125,8 @@ export class MainComponent implements OnInit {
         if (resp.length > 0) {
 
           if (this.filterInput) {
-            if (resp.find(r => r.title.toLowerCase().includes(this.filterInput))) {
-              this.addArticles(resp.filter(art => art.title.includes(this.filterInput)));
+            if (resp.find(r => r.title.toLowerCase().includes(this.filterInput.toLowerCase()))) {
+              this.addArticles(resp.filter(art => art.title.toLowerCase().includes(this.filterInput.toLowerCase())));
             } else {
               this.isAdded = false;
             }

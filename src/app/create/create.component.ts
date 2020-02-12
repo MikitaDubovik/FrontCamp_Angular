@@ -21,6 +21,7 @@ export class CreateComponent implements OnInit {
   }
 
   createNews($event) {
-    this.nodeService.createArticles($event);
+    this.nodeService.createArticles($event).subscribe(resp => {
+    });
   }
 }

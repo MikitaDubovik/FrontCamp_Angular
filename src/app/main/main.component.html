@@ -12,15 +12,9 @@
 
         <div *ngIf="!initialLoad">
 
-            <div class="loadMore" *ngIf="isAdded; else disabledButton">
-                <button mat-raised-button (click)="loadMore()">Load more</button>
+            <div class="loadMore">
+                <button mat-raised-button (click)="loadMore()" [disabled]="!isAdded">Load more</button>
             </div>
-
-            <ng-template #disabledButton>
-                <div class="loadMore">
-                    <button mat-stroked-button disabled>Load more</button>
-                </div>
-            </ng-template>
         </div>
     </div>
 </div>

@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Article } from 'src/app/models/article';
 
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
 
 const baseUrl = environment.nodeNewsUrl;
 
@@ -27,14 +28,15 @@ export class NodeService {
         return this.http.get<Article>(url);
     }
 
-    createArticles(article: Article) {
+    createArticles(article: Article): Observable<Article> {
         const url = this.createUrl();
         return this.http.post<Article>(url, article).pipe(
-            catchError(err => {
-                return err;
+            map(resp => resp),
+            catchError((err, caught) => {
+                console.log(err);
+                return caught;
             })
-        ).subscribe((data) => {
-        });
+        );
     }
 
     updateArticle(article: Article) {
