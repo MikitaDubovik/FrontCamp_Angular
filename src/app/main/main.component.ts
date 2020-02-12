@@ -5,6 +5,7 @@ import { NewsCardComponent } from './news-card/news-card.component';
 import { NewsCardDirective } from './news-card/news-card-directive';
 import { NewsapiService } from '../services/api/newsapi-service';
 import { NodeService } from '../services/api/node-service';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-main',
@@ -38,7 +39,7 @@ export class MainComponent implements OnInit {
     private componentFactoryResolver: ComponentFactoryResolver) {
     this.myTitle = 'AMASING NEWS!';
     this.defaulTitle = 'Please, choose source';
-    this.index = 0;
+    this.index = -1;
     this.initialLoad = true;
   }
 
@@ -79,6 +80,8 @@ export class MainComponent implements OnInit {
           this.filterInput = '';
           this.createdByMe = false;
           this.initialLoad = false;
+          this.index = -1;
+          this.componentsReferences = [];
           this.viewContainerRef.clear();
 
           this.addArticles(resp);
@@ -114,6 +117,20 @@ export class MainComponent implements OnInit {
       this.componentsReferences.filter(data => !data.article.title.toLowerCase().includes(this.filterInput.toLowerCase())).forEach(element => {
         this.viewContainerRef.remove(element.index);
       });
+    } else {
+      this.viewContainerRef.clear();
+      const newsCardFactory = this.componentFactoryResolver.resolveComponentFactory(NewsCardComponent);
+
+      this.componentsReferences.forEach(element => {
+        const componentRef = this.viewContainerRef.createComponent(newsCardFactory);
+        componentRef.instance.article = element.article;
+        componentRef.instance.index = element.index;
+        componentRef.instance.createdByMe = element.createdByMe;
+        componentRef.instance.compInteraction = element.compInteraction;
+      });
+
+      this.isAdded = true;
+      this.articlePage--;
     }
   }
 
@@ -170,11 +187,12 @@ export class MainComponent implements OnInit {
     const newsCardFactory = this.componentFactoryResolver.resolveComponentFactory(NewsCardComponent);
 
     for (const article of articles) {
+      this.index++;
       const componentRef = this.viewContainerRef.createComponent(newsCardFactory);
       const currentComponent = componentRef.instance;
 
       currentComponent.article = article;
-      currentComponent.index = this.index++;
+      currentComponent.index = this.index;
       currentComponent.createdByMe = this.createdByMe;
       currentComponent.compInteraction = this;
       // add reference for newly created component
