@@ -14,11 +14,11 @@
         </mat-form-field>
         <button mat-raised-button color="green" (click)="globalFilter()">Filter</button>
     </div>
-    <div>
+    <div *ngIf="currentUser">
         <mat-checkbox [(ngModel)]="createdByMe" (change)="createdByMeFilter($event.checked)">Only created by me
         </mat-checkbox>
     </div>
-    <div>
-        <button mat-raised-button color="green">Add Article</button>
+    <div *ngIf="currentUser">
+        <button mat-raised-button color="green" routerLink="/create">Add Article</button>
     </div>
 </div>

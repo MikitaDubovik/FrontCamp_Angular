@@ -1,0 +1,35 @@
+{
+  "name": "frontcamp_nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "type": "module",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-jwt": "^5.3.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.7.13",
+    "node-fetch": "^2.6.0",
+    "passport": "^0.4.0",
+    "passport-google-oauth": "^2.0.0",
+    "passport-local": "^1.0.0",
+    "pug": "^2.0.4",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "run test",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MikitaDubovik/FrontCamp_NodeJS.git"
+  },
+  "author": "Mikita",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MikitaDubovik/FrontCamp_NodeJS/issues"
+  },
+  "homepage": "https://github.com/MikitaDubovik/FrontCamp_NodeJS#readme"
+}

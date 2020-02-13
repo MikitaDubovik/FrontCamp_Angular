@@ -1,0 +1,27 @@
+.form {
+  width: 60%;
+  margin: auto;
+  margin-top: 20px;
+  padding-bottom: 80px;
+}
+
+form {
+  flex-direction: column;
+}
+
+mat-card-content.mat-card-content {
+  display: flex;
+  flex-direction: column;
+}
+
+img {
+  margin-top: 20px;
+  max-width: 260px;
+  max-height: 200px;
+}
+
+.selectButton,
+.urlInput {
+  display: block;
+  margin-top: 10px;
+}

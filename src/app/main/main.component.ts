@@ -1,8 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ApiService } from '../services/api/api.service';
+import { Component, OnInit, Input, ComponentFactoryResolver, ViewChild, ViewContainerRef } from '@angular/core';
 import { Source } from '../models/source';
 import { Article } from '../models/article';
-import { StateService } from '../services/state/state.service';
+import { NewsCardComponent } from './news-card/news-card.component';
+import { NewsCardDirective } from './news-card/news-card-directive';
+import { NewsapiService } from '../services/api/newsapi-service';
+import { NodeService } from '../services/api/node-service';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-main',
@@ -16,25 +19,34 @@ export class MainComponent implements OnInit {
   createdByMe: boolean;
   sources: Source[];
   sourceId: string;
-  articles: Article[];
-  originalArticles: Article[];
   title: string;
   articlePage: number;
   filterInput: string;
+  index: number;
+  viewContainerRef: ViewContainerRef;
+  initialLoad: boolean;
 
   // Const
   myTitle: string;
   defaulTitle: string;
 
-  constructor(private apiService: ApiService, private stateService: StateService) {
-    this.myTitle = 'AMASING NEWS';
+  @ViewChild(NewsCardDirective, { static: true }) newsCardviewContainerRef: NewsCardDirective;
+  componentsReferences = [];
+
+  constructor(
+    private newsapiService: NewsapiService,
+    private nodeService: NodeService,
+    private componentFactoryResolver: ComponentFactoryResolver) {
+    this.myTitle = 'AMASING NEWS!';
     this.defaulTitle = 'Please, choose source';
+    this.index = -1;
+    this.initialLoad = true;
   }
 
   ngOnInit() {
     this.title = this.defaulTitle;
-
-    this.apiService.getSources().subscribe(
+    this.viewContainerRef = this.newsCardviewContainerRef.viewContainerRef;
+    this.newsapiService.getSources().subscribe(
       resp => {
         this.sources = resp;
       }
@@ -46,7 +58,6 @@ export class MainComponent implements OnInit {
 
     this.setInitialArticles();
   }
-
 
   receiveGlobalFilter($event) {
     this.filterInput = $event;
@@ -61,15 +72,19 @@ export class MainComponent implements OnInit {
   }
 
   setInitialArticles() {
-    this.apiService.getArticles(this.sourceId, 1).subscribe(
+    this.newsapiService.getArticles(this.sourceId, 1).subscribe(
       resp => {
         if (resp.length > 0) {
-          this.originalArticles = resp;
-          this.articles = this.originalArticles;
           this.articlePage = 1;
           this.isAdded = true;
           this.filterInput = '';
           this.createdByMe = false;
+          this.initialLoad = false;
+          this.index = -1;
+          this.componentsReferences = [];
+          this.viewContainerRef.clear();
+
+          this.addArticles(resp);
         } else {
           alert('NEWS API IS BROKEN');
         }
@@ -79,49 +94,81 @@ export class MainComponent implements OnInit {
     this.setSourceTitle();
   }
 
-  loadMore() {
-    this.articlePage++;
+  deleteArticle(title, index) {
 
-    // For future task with own DB
-    // Add check for Load More button
+    this.nodeService.deleteArticleByTitle(title);
+
+    // removing component from container
+    this.viewContainerRef.remove(index);
+
+    this.componentsReferences = this.componentsReferences.filter(x => x.index !== index);
+  }
+
+  loadMore() {
     if (this.createdByMe) {
       this.createdByMeFilter(true);
-      // this.originalArticles = this.nodeService.getArticles(this.articlePage);
     } else {
-      this.apiService.getArticles(this.sourceId, this.articlePage).subscribe(
-        resp => {
-          if (resp.length > 0) {
-            this.originalArticles.push(...resp); // added for all cases
-
-            if (this.filterInput) {
-              if (resp.find(r => r.title.includes(this.filterInput))) {
-                this.articles.push(...resp.filter(art => art.title.includes(this.filterInput)));
-              } else {
-                this.isAdded = false;
-              }
-            } else { // if no filterInput
-              this.articles = this.originalArticles;
-            }
-          } else {
-            this.isAdded = false;
-          }
-        }
-      );
+      this.getWebArticles();
     }
   }
 
   globalFilter() {
     if (this.filterInput) {
-      this.articles = this.articles.filter(art => art.title.includes(this.filterInput));
+      this.componentsReferences.filter(data => !data.article.title.toLowerCase().includes(this.filterInput.toLowerCase())).forEach(element => {
+        this.viewContainerRef.remove(element.index);
+      });
     } else {
-      this.articles = this.originalArticles;
+      this.viewContainerRef.clear();
+      const newsCardFactory = this.componentFactoryResolver.resolveComponentFactory(NewsCardComponent);
+
+      this.componentsReferences.forEach(element => {
+        const componentRef = this.viewContainerRef.createComponent(newsCardFactory);
+        componentRef.instance.article = element.article;
+        componentRef.instance.index = element.index;
+        componentRef.instance.createdByMe = element.createdByMe;
+        componentRef.instance.compInteraction = element.compInteraction;
+      });
+
+      this.isAdded = true;
+      this.articlePage--;
     }
+  }
+
+  getWebArticles() {
+    this.articlePage++;
+
+    this.newsapiService.getArticles(this.sourceId, this.articlePage).subscribe(
+      resp => {
+        if (resp.length > 0) {
+
+          if (this.filterInput) {
+            if (resp.find(r => r.title.toLowerCase().includes(this.filterInput.toLowerCase()))) {
+              this.addArticles(resp.filter(art => art.title.toLowerCase().includes(this.filterInput.toLowerCase())));
+            } else {
+              this.isAdded = false;
+            }
+          } else {  // if no filterInput
+            this.addArticles(resp);
+          }
+        } else {
+          this.isAdded = false;
+        }
+      }
+    );
   }
 
   createdByMeFilter(selectedOption) {
     if (selectedOption) {
       this.title = this.myTitle;
-      this.articles = this.articles ? this.articles.filter(art => art.createdByMe) : null;
+      this.initialLoad = false;
+      this.viewContainerRef.clear();
+      this.nodeService.getArticles().subscribe(resp => {
+        if (resp.length > 0) {
+          this.addArticles(resp);
+        }
+
+        this.isAdded = false;
+      });
     } else {
       this.setSourceTitle();
       this.globalFilter();
@@ -133,6 +180,23 @@ export class MainComponent implements OnInit {
       this.title = this.sources.find(s => s.id === this.sourceId).name;
     } else {
       this.title = this.defaulTitle;
+    }
+  }
+
+  addArticles(articles: Article[]) {
+    const newsCardFactory = this.componentFactoryResolver.resolveComponentFactory(NewsCardComponent);
+
+    for (const article of articles) {
+      this.index++;
+      const componentRef = this.viewContainerRef.createComponent(newsCardFactory);
+      const currentComponent = componentRef.instance;
+
+      currentComponent.article = article;
+      currentComponent.index = this.index;
+      currentComponent.createdByMe = this.createdByMe;
+      currentComponent.compInteraction = this;
+      // add reference for newly created component
+      this.componentsReferences.push(currentComponent);
     }
   }
 }

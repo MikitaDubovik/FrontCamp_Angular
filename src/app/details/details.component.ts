@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { StateService } from '../services/state/state.service';
 import { Article } from '../models/article';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
-import { ApiService } from '../services/api/api.service';
+import { NodeService } from '../services/api/node-service';
+import { NewsapiService } from '../services/api/newsapi-service';
 
 @Component({
   selector: 'app-main',
@@ -14,15 +14,32 @@ import { ApiService } from '../services/api/api.service';
 export class DetailsComponent implements OnInit {
 
   article: Article;
+  createdByMe: boolean;
+  title: string;
+  defaultTitle = 'AMASING NEWS';
 
-  constructor(private state: StateService, private route: ActivatedRoute, private apiService: ApiService) { }
+  constructor(private route: ActivatedRoute, private nodeService: NodeService, private newsapiService: NewsapiService) {
+    this.title = '';
+    this.article = new Article();
+    this.article.title = '';
+  }
 
   ngOnInit() {
     this.route.paramMap.pipe(
       switchMap(params => {
+        this.createdByMe = params.get('createdByMe') === 'true';
         const title = params.get('title');
-        return this.apiService.getArticleByTitle(title);
+        if (this.createdByMe) {
+          this.title = this.defaultTitle;
+          return this.nodeService.getArticleByTitle(title);
+        }
+
+        return this.newsapiService.getArticleByTitle(title);
       })
-    ).subscribe(resp => this.article = resp[0]);
+    ).subscribe(resp => { this.article = resp; this.title = resp.source ? resp.source.name : this.defaultTitle; });
+  }
+
+  delete(title: string) {
+    this.nodeService.deleteArticleByTitle(title);
   }
 }

@@ -1,0 +1,9 @@
+<div class="edit">
+    <app-title [title]="title">
+    </app-title>
+
+    <app-news-form [oldArticle]="oldArticle" (clickSaveButton)="updateNews($event)" *ngIf="oldArticle">
+
+    </app-news-form>
+
+</div>

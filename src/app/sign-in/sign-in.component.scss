@@ -1,0 +1,18 @@
+.signin {
+  padding-top: 33px;
+}
+
+.signin_form {
+  width: 80%;
+  margin: auto;
+  margin-top: 20px;
+}
+
+form {
+  flex-direction: column;
+}
+
+mat-card-content.mat-card-content {
+  display: flex;
+  flex-direction: column;
+}
