@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NewsCardComponent } from './news-card.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('NewsCardComponent', () => {
   let component: NewsCardComponent;
@@ -8,7 +9,8 @@ describe('NewsCardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NewsCardComponent ]
+      declarations: [ NewsCardComponent ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   }));
