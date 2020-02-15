@@ -51,7 +51,7 @@ describe('NewsFormComponent', () => {
       author: 'TestA',
       url: 'TestU',
       imageType: 'TestIT'
-    })
+    });
 
     spyOn(component.clickSaveButton, 'emit');
 
@@ -61,10 +61,12 @@ describe('NewsFormComponent', () => {
   });
 
   it('should read file', () => {
-    const blob = new Blob([""], { type: "text/html" });
-    blob["lastModifiedDate"] = "";
-    blob["name"] = "filename";
-    const file = <File>blob;
+    const blob = new Blob([''], { type: 'text/html' });
+    const lastModifiedDateKey = 'lastModifiedDate';
+    blob[lastModifiedDateKey] = '';
+    const nameKey = 'name';
+    blob[nameKey] = 'filename';
+    const file = blob as File;
     const event = {
       target: {
         files: [file]
@@ -72,5 +74,5 @@ describe('NewsFormComponent', () => {
     };
     component.imageInputChange(event);
     expect(component.newsForm.value.image).not.toBeUndefined();
-  })
+  });
 });

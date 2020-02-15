@@ -1,14 +1,15 @@
-import { AuthenticationService } from './authentication-service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
+import { UserService } from './users-service';
+import { User } from 'src/app/models/user';
 import { environment } from 'src/environments/environment';
 
-
-describe('AuthenticationService', () => {
+describe('UserService', () => {
     let httpClient: HttpClient;
     let httpTestingController: HttpTestingController;
-    let service: AuthenticationService;
+
+    let service: UserService;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -16,29 +17,14 @@ describe('AuthenticationService', () => {
         });
         httpClient = TestBed.get(HttpClient);
         httpTestingController = TestBed.get(HttpTestingController);
-        service = new AuthenticationService(httpClient);
+        service = new UserService(httpClient);
     });
 
     afterEach(() => {
         service = null;
-        localStorage.removeItem('currentUser');
     });
 
-    it('should remove item from localStorage', () => {
-        localStorage.setItem('currentUser', '12345');
-        expect(localStorage.getItem('currentUser')).toEqual('12345');
-
-        service.logout();
-
-        expect(localStorage.getItem('currentUser')).toBeNull();
-    });
-
-    it('should send post request and get user data', () => {
-        service.login('test', 'test').subscribe(data => {
-
-        });
-        const req = httpTestingController.expectOne(environment.usersUrl + '/login');
-        expect(req.request.method).toEqual('POST');
+    it('should creaate user', () => {
         const user = {
             user:
             {
@@ -50,9 +36,13 @@ describe('AuthenticationService', () => {
             }
         };
 
+        service.create(new User()).subscribe(data => {
+            expect(JSON.stringify(data)).toEqual(JSON.stringify(user));
+        });
+
+        const req = httpTestingController.expectOne(environment.usersUrl);
+        expect(req.request.method).toEqual('POST');
         req.flush(user);
         httpTestingController.verify();
-        expect(localStorage.getItem('currentUser')).toEqual(JSON.stringify(user));
     });
-
 });

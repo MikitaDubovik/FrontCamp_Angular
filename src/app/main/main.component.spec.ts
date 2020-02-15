@@ -1,17 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MainComponent } from './main.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { NO_ERRORS_SCHEMA, ComponentFactoryResolver } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { NewsCardDirective } from './news-card/news-card-directive';
 import { NewsapiService } from '../services/api/newsapi-service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Article } from '../models/article';
+import { NodeService } from '../services/api/node-service';
 
 describe('MainComponent', () => {
   let component: MainComponent;
   let fixture: ComponentFixture<MainComponent>;
   let newsapiService: NewsapiService;
+  let componentFactoryResolver: ComponentFactoryResolver;
+  let nodeService: NodeService;
 
   beforeEach(async(() => {
 
@@ -19,7 +22,7 @@ describe('MainComponent', () => {
       declarations: [MainComponent, NewsCardDirective],
       imports: [HttpClientModule],
       schemas: [NO_ERRORS_SCHEMA],
-      providers: [NewsapiService]
+      providers: [NewsapiService, NodeService]
     })
       .compileComponents();
   }));
@@ -90,5 +93,76 @@ describe('MainComponent', () => {
   it('should set default title', () => {
     component.setSourceTitle();
     expect(component.title).toEqual('Please, choose source');
+  });
+
+  it('should set initial articles', () => {
+    newsapiService = TestBed.get(NewsapiService);
+    const articles: Article[] = [];
+    articles[0] = new Article();
+    spyOn(newsapiService, 'getArticles').and.returnValue(of(articles));
+
+    spyOn(component, 'addArticles');
+    spyOn(component, 'setSourceTitle');
+
+    component.setInitialArticles();
+
+    expect(component.articlePage).toEqual(1);
+    expect(component.index).toEqual(-1);
+    expect(component.componentsReferences.length).toEqual(0);
+  });
+
+  it('should filter news', () => {
+    component.filterInput = 'test';
+    const testValues = [{ test: 'test1' }, { test: 'test2' }];
+    component.componentsReferences = testValues;
+
+    spyOn(component.componentsReferences, 'filter').and.returnValue(testValues);
+    spyOn(testValues, 'forEach');
+
+    component.globalFilter();
+    expect(component.componentsReferences.filter).toHaveBeenCalled();
+  });
+
+  it('should refresh news', () => {
+    spyOn(component.viewContainerRef, 'clear');
+
+    componentFactoryResolver = TestBed.get(ComponentFactoryResolver);
+
+    spyOn(componentFactoryResolver, 'resolveComponentFactory');
+
+    spyOn(component.componentsReferences, 'forEach');
+
+    component.globalFilter();
+
+    expect(component.isAdded).toBeTruthy();
+    expect(component.articlePage).toBeLessThan(0);
+  });
+
+  it('should display user\'s news', () => {
+    component.myTitle = 'TestTitle';
+
+    nodeService = TestBed.get(NodeService);
+    const testValues: Article[] = [];
+    const article = new Article();
+    article.title = 'Test';
+    testValues.push(article);
+
+    spyOn(nodeService, 'getArticles').and.returnValue(of(testValues));
+
+    component.createdByMeFilter(true);
+
+    expect(component.title).toEqual('TestTitle');
+    expect(nodeService.getArticles).toHaveBeenCalled();
+    expect(component.isAdded).toBeFalsy();
+  });
+
+  it('should display remote news', () => {
+    spyOn(component, 'setSourceTitle');
+    spyOn(component, 'globalFilter');
+
+    component.createdByMeFilter(false);
+
+    expect(component.setSourceTitle).toHaveBeenCalled();
+    expect(component.globalFilter).toHaveBeenCalled();
   });
 });
