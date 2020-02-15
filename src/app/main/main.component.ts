@@ -85,13 +85,12 @@ export class MainComponent implements OnInit {
           this.viewContainerRef.clear();
 
           this.addArticles(resp);
+          this.setSourceTitle();
         } else {
           alert('NEWS API IS BROKEN');
         }
       }
     );
-
-    this.setSourceTitle();
   }
 
   deleteArticle(title, index) {

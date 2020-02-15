@@ -40,4 +40,37 @@ describe('NewsFormComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should send new article', () => {
+    component.newsForm.patchValue({
+      title: 'TestT',
+      description: 'TestD',
+      content: 'TestC',
+      image: 'TestI',
+      data: 'TestDa',
+      author: 'TestA',
+      url: 'TestU',
+      imageType: 'TestIT'
+    })
+
+    spyOn(component.clickSaveButton, 'emit');
+
+    component.onSubmit();
+
+    expect(component.clickSaveButton.emit).toHaveBeenCalled();
+  });
+
+  it('should read file', () => {
+    const blob = new Blob([""], { type: "text/html" });
+    blob["lastModifiedDate"] = "";
+    blob["name"] = "filename";
+    const file = <File>blob;
+    const event = {
+      target: {
+        files: [file]
+      }
+    };
+    component.imageInputChange(event);
+    expect(component.newsForm.value.image).not.toBeUndefined();
+  })
 });
