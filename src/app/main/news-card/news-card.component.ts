@@ -20,7 +20,7 @@ export class NewsCardComponent implements OnInit {
   public compInteraction: DeleteArticle;
 
   constructor() {
-    this.article = this.article ? this.article : new Article();
+    this.article = this.article || new Article();
   }
 
   ngOnInit() {
