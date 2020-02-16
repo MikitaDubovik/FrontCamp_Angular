@@ -5,7 +5,7 @@ import { NewsCardComponent } from './news-card/news-card.component';
 import { NewsCardDirective } from './news-card/news-card-directive';
 import { NewsapiService } from '../services/api/newsapi-service';
 import { NodeService } from '../services/api/node-service';
-import { element } from 'protractor';
+
 
 @Component({
   selector: 'app-main',
@@ -85,13 +85,12 @@ export class MainComponent implements OnInit {
           this.viewContainerRef.clear();
 
           this.addArticles(resp);
+          this.setSourceTitle();
         } else {
           alert('NEWS API IS BROKEN');
         }
       }
     );
-
-    this.setSourceTitle();
   }
 
   deleteArticle(title, index) {
@@ -114,9 +113,11 @@ export class MainComponent implements OnInit {
 
   globalFilter() {
     if (this.filterInput) {
-      this.componentsReferences.filter(data => !data.article.title.toLowerCase().includes(this.filterInput.toLowerCase())).forEach(element => {
-        this.viewContainerRef.remove(element.index);
-      });
+      this.componentsReferences.filter(
+        data => !data.article.title.toLowerCase().includes(
+          this.filterInput.toLowerCase())).forEach(element => {
+            this.viewContainerRef.remove(element.index);
+          });
     } else {
       this.viewContainerRef.clear();
       const newsCardFactory = this.componentFactoryResolver.resolveComponentFactory(NewsCardComponent);

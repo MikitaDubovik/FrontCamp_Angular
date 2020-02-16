@@ -17,7 +17,7 @@ export class NewsFormComponent implements OnInit {
   imageValue: any;
 
   constructor(private fb: FormBuilder) {
-
+    this.oldArticle = this.oldArticle ? this.oldArticle : new Article();
   }
 
   ngOnInit() {

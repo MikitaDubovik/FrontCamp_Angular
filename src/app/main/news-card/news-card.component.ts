@@ -19,7 +19,9 @@ export class NewsCardComponent implements OnInit {
   // interface for Parent-Child interaction
   public compInteraction: DeleteArticle;
 
-  constructor() { }
+  constructor() {
+    this.article = this.article || new Article();
+  }
 
   ngOnInit() {
   }
