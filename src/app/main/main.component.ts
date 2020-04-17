@@ -37,7 +37,7 @@ export class MainComponent implements OnInit {
     private newsapiService: NewsapiService,
     private nodeService: NodeService,
     private componentFactoryResolver: ComponentFactoryResolver) {
-    this.myTitle = 'AMASING NEWS!';
+    this.myTitle = 'AMAZING NEWS!';
     this.defaulTitle = 'Please, choose source';
     this.index = -1;
     this.initialLoad = true;
