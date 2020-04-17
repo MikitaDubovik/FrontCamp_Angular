@@ -16,7 +16,7 @@ export class DetailsComponent implements OnInit {
   article: Article;
   createdByMe: boolean;
   title: string;
-  defaultTitle = 'AMASING NEWS';
+  defaultTitle = 'AMAZING NEWS';
 
   constructor(private route: ActivatedRoute, private nodeService: NodeService, private newsapiService: NewsapiService) {
     this.title = '';
